@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Bridge | Transplant Discharge Wellness Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #162640;
+      --navy-light: #1e3a5f;
+      --amber: #c8922a;
+      --amber-light: #e8b44a;
+      --amber-dim: rgba(200,146,42,0.12);
+      --text: #d0dce8;
+      --muted: #7a9ab8;
+      --border: rgba(200,146,42,0.2);
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,22,40,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { list-style: none; display: flex; gap: 1.6rem; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+
+    /* ── BANNER ── */
+    .page-banner {
+      position: relative; height: 480px;
+      display: flex; align-items: flex-end;
+      padding: 0 5rem 3.5rem;
+      overflow: hidden; margin-top: 64px;
+    }
+    .banner-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(10,22,40,0.2) 0%, rgba(10,22,40,0.5) 40%,
+        rgba(10,22,40,0.95) 75%, rgba(10,22,40,1) 100%);
+    }
+    .banner-content { position: relative; z-index: 2; }
+    .banner-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; font-weight: 900;
+      color: var(--white); line-height: 1; margin-bottom: 1rem;
+    }
+    .banner-title span { color: var(--amber); }
+    .banner-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.2rem;
+      color: var(--muted); max-width: 620px; line-height: 1.6;
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 900px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section { margin-bottom: 5rem; }
+    .amber-rule { width: 60px; height: 2px; background: var(--amber); margin-bottom: 2rem; }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--white); margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--amber); }
+    p { margin-bottom: 1.2rem; font-size: 0.97rem; }
+
+    /* ── STAT STRIP ── */
+    .stat-strip {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; margin: 2.5rem 0;
+    }
+    .stat-cell {
+      background: var(--navy-mid);
+      padding: 2rem; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--amber); line-height: 1; display: block;
+    }
+    .stat-label {
+      font-size: 0.8rem; color: var(--muted);
+      margin-top: 0.4rem; line-height: 1.4;
+    }
+
+    /* ── 7 FACTORS ── */
+    .factors-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .factor-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.4rem 1.6rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .factor-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--amber); line-height: 1; flex-shrink: 0;
+      width: 2rem; text-align: center;
+    }
+    .factor-content {}
+    .factor-title {
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .factor-desc { font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+    .factor-transplant {
+      font-size: 0.75rem; color: var(--amber);
+      font-style: italic; margin-top: 0.4rem;
+    }
+
+    /* ── THREE TOUCH TIMELINE ── */
+    .timeline {
+      position: relative; margin: 3rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 28px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--amber), rgba(200,146,42,0.2));
+    }
+    .timeline-item {
+      display: flex; gap: 2rem;
+      margin-bottom: 2.5rem; position: relative;
+    }
+    .timeline-dot {
+      width: 58px; height: 58px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--navy-mid);
+      border: 2px solid var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 900;
+      color: var(--amber); z-index: 1;
+    }
+    .timeline-content {
+      flex: 1; background: var(--navy-mid);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.8rem 2rem;
+    }
+    .timeline-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .timeline-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .timeline-desc { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+
+    /* ── PEER DEBRIEF CARD ── */
+    .peer-card {
+      background: linear-gradient(135deg, rgba(200,146,42,0.08), rgba(22,38,64,0.6));
+      border: 1px solid rgba(200,146,42,0.35);
+      border-radius: 8px; padding: 2.5rem;
+      margin-top: 1.5rem;
+    }
+    .peer-prompt {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.2rem;
+      color: var(--white); line-height: 1.7;
+      border-left: 3px solid var(--amber);
+      padding-left: 1.5rem; margin: 1.2rem 0;
+    }
+    .peer-rules {
+      list-style: none; margin-top: 1.2rem;
+    }
+    .peer-rules li {
+      font-size: 0.88rem; color: var(--text);
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(200,146,42,0.1);
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+    .peer-rules li::before {
+      content: '→'; color: var(--amber); flex-shrink: 0; font-weight: 600;
+    }
+
+    /* ── FORM STYLES ── */
+    .form-container {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      margin-top: 2rem;
+    }
+    .form-header {
+      background: rgba(200,146,42,0.12);
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .form-header-title {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber);
+    }
+    .form-header-badge {
+      font-size: 0.68rem; color: var(--muted);
+      background: rgba(200,146,42,0.08);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 0.3rem 0.8rem;
+    }
+    .form-body { padding: 2.5rem; }
+    .form-q { margin-bottom: 2.2rem; }
+    .form-q-num {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .form-q-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; color: var(--white);
+      margin-bottom: 1rem; line-height: 1.5;
+    }
+    .form-q-hint {
+      font-size: 0.78rem; color: var(--muted);
+      font-style: italic; margin-bottom: 1rem; display: block;
+    }
+
+    /* Multiple choice */
+    .mc-options { display: flex; flex-direction: column; gap: 0.7rem; }
+    .mc-option {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      background: rgba(200,146,42,0.04);
+      border: 1px solid rgba(200,146,42,0.15);
+      border-radius: 6px; padding: 0.9rem 1.1rem;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .mc-option:hover { border-color: var(--amber); background: rgba(200,146,42,0.08); }
+    .mc-option input[type="radio"] { margin-top: 2px; accent-color: var(--amber); flex-shrink: 0; }
+    .mc-option-text { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+
+    /* Short answer */
+    .form-textarea {
+      width: 100%; min-height: 110px;
+      background: rgba(200,146,42,0.04);
+      border: 1px solid rgba(200,146,42,0.2);
+      border-radius: 6px; padding: 1rem 1.2rem;
+      color: var(--white); font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 300;
+      resize: vertical; outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-textarea:focus { border-color: var(--amber); background: rgba(200,146,42,0.06); }
+    .form-textarea::placeholder { color: rgba(122,154,184,0.5); }
+
+    /* Likert */
+    .likert-wrapper { overflow-x: auto; }
+    .likert-table { width: 100%; border-collapse: collapse; }
+    .likert-header th {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); padding: 0.6rem 0.5rem;
+      text-align: center; border-bottom: 1px solid var(--border);
+    }
+    .likert-header th:first-child { text-align: left; }
+    .likert-row td {
+      padding: 0.9rem 0.5rem;
+      border-bottom: 1px solid rgba(200,146,42,0.06);
+      text-align: center; vertical-align: middle;
+    }
+    .likert-row td:first-child {
+      text-align: left; font-size: 0.88rem;
+      color: var(--text); padding-right: 1rem;
+    }
+    .likert-row:last-child td { border-bottom: none; }
+    .likert-row input[type="radio"] { accent-color: var(--amber); cursor: pointer; transform: scale(1.2); }
+
+    /* Submit */
+    .form-submit-row {
+      display: flex; align-items: center; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .submit-btn {
+      display: inline-block; padding: 1rem 2.8rem;
+      background: var(--amber); color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      border: none; cursor: pointer; border-radius: 2px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .submit-btn:hover { background: var(--amber-light); transform: translateY(-2px); }
+    .submit-note { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+
+    /* Success message */
+    .success-message {
+      display: none; text-align: center;
+      padding: 3rem 2rem;
+    }
+    .success-message.visible { display: block; }
+    .success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .success-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CLOSING QUOTE ── */
+    .closing-quote {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid var(--border); margin-top: 3rem;
+    }
+    .closing-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.5rem; font-weight: 700;
+      color: var(--white); line-height: 1.5;
+      max-width: 720px; margin: 0 auto 1rem;
+    }
+    .closing-quote blockquote span { color: var(--amber); }
+    .closing-quote cite { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ── PAGE NAV ── */
+    .page-nav {
+      display: flex; justify-content: space-between;
+      padding: 2.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+    .page-nav-btn {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; transition: opacity 0.2s;
+    }
+    .page-nav-btn:hover { opacity: 0.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(6,14,26,0.95);
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--white); }
+    footer p { font-size: 0.75rem; color: var(--muted); margin: 0; }
+
+    /* Fade-up */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Transplant Discharge Wellness Group</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="whos-invited.html">Who's Invited</a></li>
+      <li><a href="before-you-arrive.html">Before You Arrive</a></li>
+      <li><a href="facilitation.html">How This Room Works</a></li>
+      <li><a href="learning-environment.html">The Learning Environment</a></li>
+      <li><a href="point-of-care.html">The Point of Care</a></li>
+      <li><a href="the-bridge.html" class="active">The Bridge</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-banner">
+    <div class="banner-bg" id="bannerBg"></div>
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <p class="banner-eyebrow fade-up">Transfer of Training — Evaluation Framework</p>
+      <h1 class="banner-title fade-up delay-1">The <span>Bridge</span></h1>
+      <p class="banner-sub fade-up delay-2">Training is only the beginning. What happens at the bedside — in the days and weeks after — is the only measure that matters.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- THE PROBLEM -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Why Most Training Fails</div>
+      <h2 class="section-title">The <em>$190 Billion</em> Problem</h2>
+      <p>Organizations spend $190 billion annually on workplace learning. Research suggests only about 10% of that training ever transfers into actual changed behavior on the job. The rest evaporates — not because the training was bad, but because no one built the bridge between the training room and the workplace.</p>
+      <p>This program was designed against that failure from the beginning. Every element — the Cold Start, the Pop-Up Rules, the Toasts, the Threshold — exists not to transfer information, but to change the way a clinician stands at a patient's bedside on discharge day. This page is how we know whether it worked.</p>
+
+      <div class="stat-strip">
+        <div class="stat-cell">
+          <span class="stat-num">$190B</span>
+          <div class="stat-label">Spent annually on<br>workplace training (ASTD)</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">~10%</span>
+          <div class="stat-label">Estimated rate of<br>actual learning transfer</div>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">3</span>
+          <div class="stat-label">Touchpoints in our<br>evaluation arc</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 FACTORS -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">The Science Behind This Program</div>
+      <h2 class="section-title">Seven Factors. All of Them Matter.</h2>
+      <p>Research from 498 interviews across 17 professional groups — judges, teachers, physicians, firefighters — identified seven intertwined factors that determine whether learning transfers. This program was built to address every one of them.</p>
+
+      <div class="factors-grid">
+        <div class="factor-card">
+          <div class="factor-num">1</div>
+          <div class="factor-content">
+            <div class="factor-title">Planning Process</div>
+            <div class="factor-desc">A representative team — planners, trainers, content experts, and learners — shapes the program together.</div>
+            <div class="factor-transplant">↳ This program was built by a patient. That is the planning process.</div>
+          </div>
+        </div>
+        <div class="factor-card">
+          <div class="factor-num">2</div>
+          <div class="factor-content">
+            <div class="factor-title">Learner Characteristics & Motivation</div>
+            <div class="factor-desc">Transfer requires internal motivation — self-efficacy, confidence, and genuine desire to apply learning.</div>
+            <div class="factor-transplant">↳ The pre-work module and Serge's story activate this before session one begins.</div>
+          </div>
+        </div>
+        <div class="factor-card">
+          <div class="factor-num">3</div>
+          <div class="factor-content">
+            <div class="factor-title">Design & Delivery Methods</div>
+            <div class="factor-desc">Content must be designed for application, not passive reception. Show-me, not tell-me.</div>
+            <div class="factor-transplant">↳ Every activity in this program requires demonstration, not comprehension.</div>
+          </div>
+        </div>
+        <div class="factor-card">
+          <div class="factor-num">4</div>
+          <div class="factor-content">
+            <div class="factor-title">Learning Context</div>
+            <div class="factor-desc">The environment of the training must mirror the environment of application.</div>
+            <div class="factor-transplant">↳ The Transition Circle and Pop-Up Rules reshape the room to match the bedside.</div>
+          </div>
+        </div>
+        <div class="factor-card">
+          <div class="factor-num">5</div>
+          <div class="factor-content">
+            <div class="factor-title">Immediate Application</div>
+            <div class="factor-desc">Transfer probability drops sharply when application is delayed. Practice must begin the same day.</div>
+            <div class="factor-transplant">↳ The show-me competency check happens before any participant leaves the room.</div>
+          </div>
+        </div>
+        <div class="factor-card">
+          <div class="factor-num">6</div>
+          <div class="factor-content">
+            <div class="factor-title">Workplace Environment</div>
+            <div class="factor-desc">Transfer requires supervisory support and a culture that reinforces new behaviors after training ends.</div>
+            <div class="factor-transplant">↳ The two peer debrief sessions keep the culture alive after the training room closes.</div>
+          </div>
+        </div>
+        <div class="factor-card" style="grid-column: span 2;">
+          <div class="factor-num">7</div>
+          <div class="factor-content">
+            <div class="factor-title">Eliminating Barriers</div>
+            <div class="factor-desc">Systemic obstacles — unclear expectations, no follow-up, reverting to old norms — must be actively removed. Transfer is a team sport. It involves learners, instructors, supervisors, and in this context, the patients themselves.</div>
+            <div class="factor-transplant">↳ The three-touch evaluation arc below is how this program eliminates the most common barrier: invisibility after training ends.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE TOUCH ARC -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">The Evaluation Arc</div>
+      <h2 class="section-title">Three Touches. One Truth.</h2>
+      <p>Most programs ask one question at the end of one session. This program asks across time — because transfer is not an event. It is a process. The three-touch arc below tracks that process from the training room to the bedside and back.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <div class="timeline-label">End of Session — Day One</div>
+            <div class="timeline-title">Immediate Response</div>
+            <div class="timeline-desc">Every participant completes Form 1 anonymously before leaving the room. This captures first impressions, emotional response, and stated intentions. It is not a test. It is a baseline — the before photo. <strong style="color:var(--white)">The form is below.</strong></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <div class="timeline-label">Two Weeks After Session</div>
+            <div class="timeline-title">The Peer Debrief — No Instructors</div>
+            <div class="timeline-desc">The group reconvenes without the training team. No authority. No evaluation. Just peers telling each other the truth about what happened when they went back to the bedside. A single structured prompt guides the conversation. <strong style="color:var(--white)">The prompt is below.</strong></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <div class="timeline-label">Four Weeks After Session</div>
+            <div class="timeline-title">Full Group Return — Did It Cross the Bridge?</div>
+            <div class="timeline-desc">The entire group — care team and training leads — reconvenes to measure actual transfer. What changed at the bedside? What didn't? What needs to be built into the next session? Form 2 captures this. The same three questions as Form 1. The growth becomes visible. <strong style="color:var(--white)">Form 2 is below.</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM 1 -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Touch One — End of Session</div>
+      <h2 class="section-title">Form 1: <em>The Baseline</em></h2>
+      <p>Complete this form before you leave today. There are no right answers. Your response is anonymous. What you write here will be compared — only by you — to what you write in four weeks.</p>
+
+      <div class="form-container">
+        <div class="form-header">
+          <span class="form-header-title">Evaluation Form — Session One</span>
+          <span class="form-header-badge">🔒 Anonymous · Baseline</span>
+        </div>
+        <div class="form-body" id="form1Body">
+          <form id="form1" onsubmit="handleForm1(event)">
+
+            <!-- Q1: Multiple Choice -->
+            <div class="form-q">
+              <div class="form-q-num">Question 01 · Multiple Choice</div>
+              <div class="form-q-label">When a transplant patient is being prepared for discharge, which of the following best describes your current practice?</div>
+              <span class="form-q-hint">Choose the one that is most honest, not most ideal.</span>
+              <div class="mc-options">
+                <label class="mc-option">
+                  <input type="radio" name="q1" value="a"/>
+                  <span class="mc-option-text">I provide verbal instructions and confirm the patient understands before they leave.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q1" value="b"/>
+                  <span class="mc-option-text">I provide written materials and walk through the key points with the patient.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q1" value="c"/>
+                  <span class="mc-option-text">I require the patient to demonstrate their understanding before discharge is signed.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q1" value="d"/>
+                  <span class="mc-option-text">Discharge preparation is handled primarily by another team member or department.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q2: Short Answer -->
+            <div class="form-q">
+              <div class="form-q-num">Question 02 · Short Answer</div>
+              <div class="form-q-label">Think of the last transplant patient you were involved in discharging. What is one thing about that discharge that you wish had been different?</div>
+              <span class="form-q-hint">Be specific. There is no judgment here. Only honesty helps.</span>
+              <textarea class="form-textarea" id="form1_q2" placeholder="Write your response here..."></textarea>
+            </div>
+
+            <!-- Q3: Likert -->
+            <div class="form-q">
+              <div class="form-q-num">Question 03 · Likert Scale</div>
+              <div class="form-q-label">Rate your current confidence in each of the following discharge readiness areas.</div>
+              <span class="form-q-hint">1 = Not confident at all &nbsp;·&nbsp; 5 = Fully confident</span>
+              <div class="likert-wrapper">
+                <table class="likert-table">
+                  <thead>
+                    <tr class="likert-header">
+                      <th style="width:42%">Area</th>
+                      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="likert-row">
+                      <td>Verifying patient medication understanding</td>
+                      <td><input type="radio" name="l1_1" value="1"/></td>
+                      <td><input type="radio" name="l1_1" value="2"/></td>
+                      <td><input type="radio" name="l1_1" value="3"/></td>
+                      <td><input type="radio" name="l1_1" value="4"/></td>
+                      <td><input type="radio" name="l1_1" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Confirming a 72-hour support plan is in place</td>
+                      <td><input type="radio" name="l1_2" value="1"/></td>
+                      <td><input type="radio" name="l1_2" value="2"/></td>
+                      <td><input type="radio" name="l1_2" value="3"/></td>
+                      <td><input type="radio" name="l1_2" value="4"/></td>
+                      <td><input type="radio" name="l1_2" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Identifying and addressing family/support gaps before discharge</td>
+                      <td><input type="radio" name="l1_3" value="1"/></td>
+                      <td><input type="radio" name="l1_3" value="2"/></td>
+                      <td><input type="radio" name="l1_3" value="3"/></td>
+                      <td><input type="radio" name="l1_3" value="4"/></td>
+                      <td><input type="radio" name="l1_3" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Applying the show-me method before final sign-off</td>
+                      <td><input type="radio" name="l1_4" value="1"/></td>
+                      <td><input type="radio" name="l1_4" value="2"/></td>
+                      <td><input type="radio" name="l1_4" value="3"/></td>
+                      <td><input type="radio" name="l1_4" value="4"/></td>
+                      <td><input type="radio" name="l1_4" value="5"/></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="submit-btn">Submit Form 1 →</button>
+              <p class="submit-note">🔒 Your response is completely anonymous.<br>No name. No identifier. No judgment.</p>
+            </div>
+          </form>
+          <div class="success-message" id="success1">
+            <div class="success-icon">🙏</div>
+            <div class="success-title">Thank you.</div>
+            <p class="success-sub">Your baseline has been recorded. In four weeks you will return to this room and answer the same questions. The distance between your answers then and your answers now — that distance is the bridge.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PEER DEBRIEF -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Touch Two — Two Weeks After Session</div>
+      <h2 class="section-title">The Peer Debrief</h2>
+      <p>The training team is not in this room. That is intentional. What gets said in a room without authority is the closest thing to the truth available. This session belongs to the care team.</p>
+      <p>One prompt. One hour. No agenda beyond honesty.</p>
+
+      <div class="peer-card">
+        <div class="eyebrow">The Prompt</div>
+        <div class="peer-prompt">"Tell the group about one moment since training where you almost defaulted to the old way — and what you did instead."</div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:1rem;">If you did default to the old way — tell that story too. That is equally valuable. More, even.</p>
+        <ul class="peer-rules">
+          <li>No titles in this room. The rules from session one still apply.</li>
+          <li>One voice at a time. Everyone speaks before anyone speaks twice.</li>
+          <li>What is said in this room stays in this room — unless the group decides otherwise.</li>
+          <li>If the old system made it impossible to do it the new way — name the system. Not the person.</li>
+          <li>End by identifying one thing the group wants to bring back to the full session in two weeks.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FORM 2 -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Touch Three — Four Weeks After Session</div>
+      <h2 class="section-title">Form 2: <em>Did It Cross?</em></h2>
+      <p>The same three questions. Four weeks later. The distance between your answers now and your answers then — that distance is the measure of this program. Complete this before the full group debrief begins.</p>
+
+      <div class="form-container">
+        <div class="form-header">
+          <span class="form-header-title">Evaluation Form — Four Week Follow-Up</span>
+          <span class="form-header-badge">🔒 Anonymous · Transfer Measure</span>
+        </div>
+        <div class="form-body" id="form2Body">
+          <form id="form2" onsubmit="handleForm2(event)">
+
+            <!-- Q1: Multiple Choice -->
+            <div class="form-q">
+              <div class="form-q-num">Question 01 · Multiple Choice</div>
+              <div class="form-q-label">Since the training session, which of the following best describes your discharge practice?</div>
+              <span class="form-q-hint">Choose the one that is most honest. Growth shows in the gap between this answer and your answer four weeks ago.</span>
+              <div class="mc-options">
+                <label class="mc-option">
+                  <input type="radio" name="q2_1" value="a"/>
+                  <span class="mc-option-text">My practice has not changed — I am still doing what I was doing before.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q2_1" value="b"/>
+                  <span class="mc-option-text">I have made small changes but have not yet fully applied the show-me method.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q2_1" value="c"/>
+                  <span class="mc-option-text">I have applied the show-me method at least once since training.</span>
+                </label>
+                <label class="mc-option">
+                  <input type="radio" name="q2_1" value="d"/>
+                  <span class="mc-option-text">The show-me method is now a consistent part of my discharge practice.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q2: Short Answer -->
+            <div class="form-q">
+              <div class="form-q-num">Question 02 · Short Answer</div>
+              <div class="form-q-label">Describe one specific thing you did differently at the bedside in the past four weeks as a result of this training. If nothing changed — describe what got in the way.</div>
+              <span class="form-q-hint">Both answers are valuable. The barrier named is the barrier that can be fixed.</span>
+              <textarea class="form-textarea" id="form2_q2" placeholder="Write your response here..."></textarea>
+            </div>
+
+            <!-- Q3: Likert -->
+            <div class="form-q">
+              <div class="form-q-num">Question 03 · Likert Scale</div>
+              <div class="form-q-label">Rate your current confidence in each of the following discharge readiness areas — four weeks after training.</div>
+              <span class="form-q-hint">1 = Not confident at all &nbsp;·&nbsp; 5 = Fully confident</span>
+              <div class="likert-wrapper">
+                <table class="likert-table">
+                  <thead>
+                    <tr class="likert-header">
+                      <th style="width:42%">Area</th>
+                      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="likert-row">
+                      <td>Verifying patient medication understanding</td>
+                      <td><input type="radio" name="l2_1" value="1"/></td>
+                      <td><input type="radio" name="l2_1" value="2"/></td>
+                      <td><input type="radio" name="l2_1" value="3"/></td>
+                      <td><input type="radio" name="l2_1" value="4"/></td>
+                      <td><input type="radio" name="l2_1" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Confirming a 72-hour support plan is in place</td>
+                      <td><input type="radio" name="l2_2" value="1"/></td>
+                      <td><input type="radio" name="l2_2" value="2"/></td>
+                      <td><input type="radio" name="l2_2" value="3"/></td>
+                      <td><input type="radio" name="l2_2" value="4"/></td>
+                      <td><input type="radio" name="l2_2" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Identifying and addressing family/support gaps before discharge</td>
+                      <td><input type="radio" name="l2_3" value="1"/></td>
+                      <td><input type="radio" name="l2_3" value="2"/></td>
+                      <td><input type="radio" name="l2_3" value="3"/></td>
+                      <td><input type="radio" name="l2_3" value="4"/></td>
+                      <td><input type="radio" name="l2_3" value="5"/></td>
+                    </tr>
+                    <tr class="likert-row">
+                      <td>Applying the show-me method before final sign-off</td>
+                      <td><input type="radio" name="l2_4" value="1"/></td>
+                      <td><input type="radio" name="l2_4" value="2"/></td>
+                      <td><input type="radio" name="l2_4" value="3"/></td>
+                      <td><input type="radio" name="l2_4" value="4"/></td>
+                      <td><input type="radio" name="l2_4" value="5"/></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="submit-btn">Submit Form 2 →</button>
+              <p class="submit-note">🔒 Your response is completely anonymous.<br>The group's aggregate results will be discussed today.</p>
+            </div>
+          </form>
+          <div class="success-message" id="success2">
+            <div class="success-icon">🌉</div>
+            <div class="success-title">The bridge has been measured.</div>
+            <p class="success-sub">Thank you. Your response contributes to the collective picture of what this training produced — and what it still needs to build. That honesty is the most valuable thing in this room today.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING QUOTE -->
+    <div class="closing-quote fade-up">
+      <blockquote>"Application means getting one's hands dirty. It means having the heart to persevere in the face of obstacles. It means having <span>one's feet firmly grounded in practical reality.</span>"</blockquote>
+      <cite>— Ottoson, 1995 · Transfer of Learning Research</cite>
+    </div>
+
+    <div class="page-nav">
+      <a href="point-of-care.html" class="page-nav-btn">← The Point of Care</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-brand">Transplant Discharge Wellness Group</span>
+    <p>Confidential — Internal Hospital Training Program</p>
+  </footer>
+
+  <script>
+    // Fade-up observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form handlers
+    function handleForm1(e) {
+      e.preventDefault();
+      document.getElementById('form1').style.display = 'none';
+      const msg = document.getElementById('success1');
+      msg.classList.add('visible');
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function handleForm2(e) {
+      e.preventDefault();
+      document.getElementById('form2').style.display = 'none';
+      const msg = document.getElementById('success2');
+      msg.classList.add('visible');
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Banner SVG
+    const svgBanner = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" width="1600" height="480">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0c1e35"/>
+          <stop offset="100%" style="stop-color:#0a1628"/>
+        </linearGradient>
+        <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1e3a5f"/>
+          <stop offset="50%" style="stop-color:#c8922a;stop-opacity:0.6"/>
+          <stop offset="100%" style="stop-color:#1e3a5f"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="480" fill="url(#bg)"/>
+
+      <!-- Sky glow -->
+      <ellipse cx="800" cy="180" rx="600" ry="200" fill="#c8922a" opacity="0.04"/>
+
+      <!-- BRIDGE STRUCTURE -->
+      <!-- Road deck -->
+      <rect x="100" y="340" width="1400" height="12" rx="2" fill="#1e3a5f" stroke="#c8922a" stroke-width="1" opacity="0.8"/>
+
+      <!-- Left tower -->
+      <rect x="340" y="120" width="18" height="232" rx="2" fill="#1e4a7a"/>
+      <rect x="334" y="116" width="30" height="14" rx="3" fill="#c8922a" opacity="0.8"/>
+      <rect x="334" y="96" width="30" height="8" rx="2" fill="#c8922a" opacity="0.5"/>
+
+      <!-- Right tower -->
+      <rect x="1242" y="120" width="18" height="232" rx="2" fill="#1e4a7a"/>
+      <rect x="1236" y="116" width="30" height="14" rx="3" fill="#c8922a" opacity="0.8"/>
+      <rect x="1236" y="96" width="30" height="8" rx="2" fill="#c8922a" opacity="0.5"/>
+
+      <!-- Main cables - left to right sweeping curves -->
+      <path d="M349,116 Q800,60 1251,116" stroke="#c8922a" stroke-width="2.5" fill="none" opacity="0.7"/>
+      <path d="M349,116 Q800,80 1251,116" stroke="#c8922a" stroke-width="1" fill="none" opacity="0.3"/>
+
+      <!-- Vertical suspenders -->
+      <line x1="450" y1="152" x2="450" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="550" y1="126" x2="550" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="650" y1="108" x2="650" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="750" y1="96" x2="750" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="850" y1="96" x2="850" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="950" y1="108" x2="950" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="1050" y1="126" x2="1050" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+      <line x1="1150" y1="152" x2="1150" y2="340" stroke="#2a5a8a" stroke-width="1.5" opacity="0.5"/>
+
+      <!-- Amber glow on road deck -->
+      <rect x="100" y="340" width="1400" height="4" rx="2" fill="#c8922a" opacity="0.4"/>
+
+      <!-- Water reflection below -->
+      <rect x="0" y="370" width="1600" height="110" fill="#0a1e35" opacity="0.5"/>
+      <path d="M100,352 Q800,380 1500,352" stroke="#c8922a" stroke-width="0.8" fill="none" opacity="0.15"/>
+
+      <!-- LEFT SIDE: Training room suggestion -->
+      <rect x="50" y="220" width="200" height="120" rx="6" fill="#162640" stroke="#2a5a7a" stroke-width="1" opacity="0.8"/>
+      <text x="70" y="248" font-family="Georgia,serif" font-size="10" fill="#c8922a" opacity="0.8" letter-spacing="2">TRAINING ROOM</text>
+      <line x1="70" y1="255" x2="230" y2="255" stroke="#c8922a" stroke-width="0.8" opacity="0.4"/>
+      <rect x="70" y="265" width="60" height="8" rx="2" fill="#2a5a7a" opacity="0.6"/>
+      <rect x="140" y="265" width="40" height="8" rx="2" fill="#2a5a7a" opacity="0.4"/>
+      <rect x="70" y="280" width="80" height="8" rx="2" fill="#2a5a7a" opacity="0.4"/>
+      <rect x="70" y="295" width="50" height="8" rx="2" fill="#c8922a" opacity="0.3"/>
+      <rect x="70" y="310" width="70" height="8" rx="2" fill="#2a5a7a" opacity="0.3"/>
+
+      <!-- RIGHT SIDE: Hospital/bedside suggestion -->
+      <rect x="1350" y="220" width="200" height="120" rx="6" fill="#162640" stroke="#2a5a7a" stroke-width="1" opacity="0.8"/>
+      <text x="1370" y="248" font-family="Georgia,serif" font-size="10" fill="#c8922a" opacity="0.8" letter-spacing="2">THE BEDSIDE</text>
+      <line x1="1370" y1="255" x2="1530" y2="255" stroke="#c8922a" stroke-width="0.8" opacity="0.4"/>
+      <!-- Bed suggestion -->
+      <rect x="1390" y="270" width="110" height="55" rx="4" fill="#1a3a5a" opacity="0.7"/>
+      <rect x="1390" y="270" width="30" height="55" rx="4" fill="#2a5a7a" opacity="0.5"/>
+      <ellipse cx="1410" cy="278" rx="12" ry="12" fill="#d4906a" opacity="0.7"/>
+
+      <!-- Amber arrow across the bridge -->
+      <path d="M270,346 L1340,346" stroke="#c8922a" stroke-width="2" stroke-dasharray="12,6" opacity="0.4" marker-end="url(#arrow)"/>
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#c8922a" opacity="0.6"/>
+        </marker>
+      </defs>
+
+      <!-- Top accent -->
+      <rect x="400" y="0" width="800" height="3" fill="#c8922a" opacity="0.4" rx="1"/>
+    </svg>`;
+
+    const blob = new Blob([svgBanner], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    document.getElementById('bannerBg').style.backgroundImage = `url('${url}')`;
+    document.getElementById('bannerBg').style.backgroundSize = 'cover';
+    document.getElementById('bannerBg').style.backgroundPosition = 'center';
+  </script>
+</body>
+</html>
