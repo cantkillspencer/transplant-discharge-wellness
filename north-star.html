@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The North Star | Transplant Discharge Wellness Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #162640;
+      --navy-light: #1e3a5f;
+      --amber: #c8922a;
+      --amber-light: #e8b44a;
+      --amber-dim: rgba(200,146,42,0.12);
+      --text: #d0dce8;
+      --muted: #7a9ab8;
+      --border: rgba(200,146,42,0.2);
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,22,40,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { list-style: none; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+
+    /* ── BANNER ── */
+    .page-banner {
+      position: relative; height: 500px;
+      display: flex; align-items: flex-end;
+      padding: 0 5rem 3.5rem;
+      overflow: hidden; margin-top: 64px;
+    }
+    .banner-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(10,22,40,0.15) 0%, rgba(10,22,40,0.5) 40%,
+        rgba(10,22,40,0.95) 75%, rgba(10,22,40,1) 100%);
+    }
+    .banner-content { position: relative; z-index: 2; max-width: 800px; }
+    .banner-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; font-weight: 900;
+      color: var(--white); line-height: 1; margin-bottom: 1rem;
+    }
+    .banner-title span { color: var(--amber); }
+    .banner-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.15rem;
+      color: var(--muted); line-height: 1.6;
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section { margin-bottom: 5rem; }
+    .amber-rule { width: 60px; height: 2px; background: var(--amber); margin-bottom: 2rem; }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--white); margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--amber); }
+    p { margin-bottom: 1.2rem; font-size: 0.97rem; }
+
+    /* ── BLOOM'S TAXONOMY MAP ── */
+    .blooms-intro {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem 2.2rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .blooms-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .bloom-tier {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .bloom-tier:first-child { border-radius: 8px 8px 0 0; }
+    .bloom-tier:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 8px 8px; }
+    .bloom-tier:hover { transform: translateX(4px); }
+
+    .bloom-level {
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      border-right: 1px solid var(--border);
+    }
+    .bloom-tier:nth-child(1) .bloom-level { background: rgba(200,146,42,0.25); }
+    .bloom-tier:nth-child(2) .bloom-level { background: rgba(200,146,42,0.18); }
+    .bloom-tier:nth-child(3) .bloom-level { background: rgba(200,146,42,0.13); }
+    .bloom-tier:nth-child(4) .bloom-level { background: rgba(200,146,42,0.09); }
+    .bloom-tier:nth-child(5) .bloom-level { background: rgba(200,146,42,0.05); }
+
+    .bloom-verb {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 900;
+      color: var(--amber); letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .bloom-taxonomy-level {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .bloom-content {
+      padding: 1.6rem 2rem;
+      background: var(--navy-mid);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bloom-objective {
+      font-size: 0.95rem;
+      color: var(--white);
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .bloom-anchor-badge {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(200,146,42,0.1);
+      border: 1px solid rgba(200,146,42,0.3);
+      border-radius: 20px;
+      padding: 0.2rem 0.7rem;
+      margin-top: 0.3rem;
+      width: fit-content;
+    }
+    .bloom-gap {
+      font-size: 0.72rem; color: var(--muted);
+      font-style: italic; margin-top: 0.3rem;
+    }
+
+    /* ── WIIFM DASHBOARD ── */
+    .wiifm-intro {
+      background: linear-gradient(135deg, rgba(200,146,42,0.08), rgba(22,38,64,0.5));
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem 2.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .wiifm-intro-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem; color: var(--white);
+      line-height: 1.7;
+    }
+
+    .wiifm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .wiifm-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .wiifm-card:hover { transform: translateY(-3px); border-color: var(--amber); }
+
+    .wiifm-card-header {
+      padding: 1rem 1.4rem;
+      background: rgba(200,146,42,0.1);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .wiifm-icon { font-size: 1.3rem; }
+    .wiifm-header-text {}
+    .wiifm-objective-ref {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.2rem;
+    }
+    .wiifm-card-title {
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--white); line-height: 1.3;
+    }
+
+    .wiifm-card-body { padding: 1.4rem; }
+    .wiifm-academic {
+      font-size: 0.78rem; color: var(--muted);
+      font-style: italic; margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(200,146,42,0.1);
+    }
+    .wiifm-human {
+      font-size: 0.9rem; color: var(--white);
+      line-height: 1.7; font-weight: 400;
+    }
+    .wiifm-human strong { color: var(--amber); font-weight: 600; }
+
+    /* The anchor card spans full width */
+    .wiifm-card.anchor {
+      grid-column: span 2;
+      border-color: rgba(200,146,42,0.4);
+    }
+    .wiifm-card.anchor .wiifm-card-header {
+      background: rgba(200,146,42,0.15);
+    }
+
+    /* ── THE ANCHOR CARD - special treatment ── */
+    .anchor-badge-large {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--navy);
+      background: var(--amber);
+      border-radius: 20px;
+      padding: 0.25rem 0.8rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* ── SIGNAL SECTION ── */
+    .signal-block {
+      background: linear-gradient(135deg, rgba(200,146,42,0.1), rgba(10,22,40,0.9));
+      border: 1px solid rgba(200,146,42,0.4);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .signal-left {}
+    .signal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--amber); line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .signal-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem; color: var(--white);
+      line-height: 1.5; margin-bottom: 1.2rem;
+    }
+    .signal-desc {
+      font-size: 0.88rem; color: var(--text);
+      line-height: 1.7;
+    }
+    .signal-right {
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .signal-responsibility {
+      background: rgba(10,22,40,0.6);
+      border: 1px solid rgba(200,146,42,0.2);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+    .signal-resp-icon { color: var(--amber); flex-shrink: 0; font-size: 1rem; }
+    .signal-resp-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+    .signal-resp-text strong { color: var(--white); }
+
+    /* ── CLOSING QUOTE ── */
+    .closing-quote {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid var(--border); margin-top: 3rem;
+    }
+    .closing-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.5rem; font-weight: 700;
+      color: var(--white); line-height: 1.5;
+      max-width: 720px; margin: 0 auto 1rem;
+    }
+    .closing-quote blockquote span { color: var(--amber); }
+    .closing-quote cite {
+      font-size: 0.78rem; color: var(--muted);
+      letter-spacing: 0.15em; text-transform: uppercase;
+    }
+
+    /* ── PAGE NAV ── */
+    .page-nav {
+      display: flex; justify-content: space-between;
+      padding: 2.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+    .page-nav-btn {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; transition: opacity 0.2s;
+    }
+    .page-nav-btn:hover { opacity: 0.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(6,14,26,0.95);
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--white); }
+    footer p { font-size: 0.75rem; color: var(--muted); margin: 0; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Transplant Discharge Wellness Group</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="whos-invited.html">Who's Invited</a></li>
+      <li><a href="before-you-arrive.html">Before You Arrive</a></li>
+      <li><a href="facilitation.html">How This Room Works</a></li>
+      <li><a href="learning-environment.html">The Learning Environment</a></li>
+      <li><a href="point-of-care.html">The Point of Care</a></li>
+      <li><a href="the-bridge.html">The Bridge</a></li>
+      <li><a href="north-star.html" class="active">The North Star</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-banner">
+    <div class="banner-bg" id="bannerBg"></div>
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <p class="banner-eyebrow fade-up">Learning Objectives & Competencies</p>
+      <h1 class="banner-title fade-up delay-1">The <span>North Star</span></h1>
+      <p class="banner-sub fade-up delay-2">What this program is designed to produce — stated plainly, measured honestly, and translated into the language of the people doing the work.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- INTRO -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Why Objectives Matter</div>
+      <h2 class="section-title">A promise written in two languages.</h2>
+      <p>Learning objectives exist for two audiences who rarely speak to each other. Institutions need measurable, taxonomic language — verbs like "analyze" and "construct" that can be assessed and documented. Clinicians need human language — sentences that answer the question every adult learner asks before they commit to anything: <em style="color:var(--amber)">what is in this for me?</em></p>
+      <p>This page holds both. The Bloom's Taxonomy Map is the program's promise to the institution. The WIIFM Dashboard is the program's promise to the person in the chair. They are the same promise. Just spoken in different rooms.</p>
+    </div>
+
+    <!-- BLOOM'S TAXONOMY MAP -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Artifact One — Bloom's Taxonomy Map</div>
+      <h2 class="section-title">Five Objectives. <em>One Direction.</em></h2>
+
+      <div class="blooms-intro">
+        These five objectives are sequenced from higher-order to foundational thinking — each one corresponding to a specific competency gap this program was built to close. They are measurable, observable, and tied to real performance at the bedside. The first objective is the anchor. Everything else is built around it.
+      </div>
+
+      <div class="blooms-stack">
+
+        <!-- OBJ 1: ANCHOR - Evaluate -->
+        <div class="bloom-tier">
+          <div class="bloom-level">
+            <div class="bloom-verb">Evaluate</div>
+            <div class="bloom-taxonomy-level">Bloom's Level 5</div>
+          </div>
+          <div class="bloom-content">
+            <div class="bloom-objective">Evaluate the family system of each transplant patient — including relational history, support capacity, and potential barriers to post-discharge care — and use that assessment to develop an individualized discharge support plan before the patient leaves the unit.</div>
+            <span class="bloom-anchor-badge">★ Anchor Objective</span>
+            <div class="bloom-gap">↳ Addresses the gap between logistics-based discharge and human-centered discharge</div>
+          </div>
+        </div>
+
+        <!-- OBJ 2: Construct -->
+        <div class="bloom-tier">
+          <div class="bloom-level">
+            <div class="bloom-verb">Construct</div>
+            <div class="bloom-taxonomy-level">Bloom's Level 6</div>
+          </div>
+          <div class="bloom-content">
+            <div class="bloom-objective">Construct a personalized "Day One through Week Eight" recovery framework for each patient that maps what a healthy day looks like at each stage — so the patient and their support system can recognize when something is wrong before it becomes a crisis.</div>
+            <div class="bloom-gap">↳ Addresses the 72-Hour Planning gap and extends it through the full recovery arc</div>
+          </div>
+        </div>
+
+        <!-- OBJ 3: Analyze -->
+        <div class="bloom-tier">
+          <div class="bloom-level">
+            <div class="bloom-verb">Analyze</div>
+            <div class="bloom-taxonomy-level">Bloom's Level 4</div>
+          </div>
+          <div class="bloom-content">
+            <div class="bloom-objective">Analyze each patient's complete medication profile — including timing, interactions with current supplements, and potential access barriers (financial, logistical, or social) — and develop a contingency plan for medication continuity before discharge is signed.</div>
+            <div class="bloom-gap">↳ Addresses the Standardized Validation gap and the Ownership gap</div>
+          </div>
+        </div>
+
+        <!-- OBJ 4: Design -->
+        <div class="bloom-tier">
+          <div class="bloom-level">
+            <div class="bloom-verb">Design</div>
+            <div class="bloom-taxonomy-level">Bloom's Level 6</div>
+          </div>
+          <div class="bloom-content">
+            <div class="bloom-objective">Design a structured check-in plan with each patient's designated Signal — their named post-discharge accountability partner — that establishes contact cadence, escalation protocol, and a clear pathway back to the care team if anything changes.</div>
+            <div class="bloom-gap">↳ Addresses the Ownership gap and the absence of structured post-discharge accountability</div>
+          </div>
+        </div>
+
+        <!-- OBJ 5: Apply -->
+        <div class="bloom-tier">
+          <div class="bloom-level">
+            <div class="bloom-verb">Apply</div>
+            <div class="bloom-taxonomy-level">Bloom's Level 3</div>
+          </div>
+          <div class="bloom-content">
+            <div class="bloom-objective">Apply self-monitoring practices that allow care team members to recognize when they are approaching capacity, communicate that clearly to their team, and access support before it affects patient care.</div>
+            <div class="bloom-gap">↳ Addresses caregiver sustainability — the condition under which all other objectives remain possible</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WIIFM DASHBOARD -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Artifact Two — The WIIFM Dashboard</div>
+      <h2 class="section-title">What This Actually <em>Means</em> For You</h2>
+
+      <div class="wiifm-intro">
+        <p class="wiifm-intro-text">"Adults do not learn in order to know. They learn in order to do. Every objective above was written for an institution. Everything below was written for you — the person who has to go back to that unit on Monday and make these things real."</p>
+        <p style="font-size:0.78rem; color:var(--muted); margin-top:0.8rem; margin-bottom:0;">— Adapted from Malcolm Knowles, <em>The Modern Practice of Adult Education</em></p>
+      </div>
+
+      <div class="wiifm-grid">
+
+        <!-- ANCHOR CARD - FULL WIDTH -->
+        <div class="wiifm-card anchor">
+          <div class="wiifm-card-header">
+            <div class="wiifm-icon">🧭</div>
+            <div class="wiifm-header-text">
+              <div class="wiifm-objective-ref">Anchor Objective · Evaluate</div>
+              <div class="wiifm-card-title">Understanding the Family — Not Just the Name on the Form <span class="anchor-badge-large">Anchor</span></div>
+            </div>
+          </div>
+          <div class="wiifm-card-body" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+            <div>
+              <div class="wiifm-academic">Academic language: "Evaluate the family system of each transplant patient, including relational history, support capacity, and potential barriers to post-discharge care."</div>
+              <div class="wiifm-human">What this means for you: <strong>You will never again hand a patient a discharge bag without knowing who — or what — is waiting for them at home.</strong> Not just a name and a phone number. The real picture. Because a transplant doesn't happen in a vacuum. There is always a story. Genetics. History. Distance. Estrangement. Love. Fear. You deserve to know that story before you sign. And so does your patient.</div>
+            </div>
+            <div>
+              <div class="wiifm-human" style="margin-top:1.8rem;">This objective will give you a structured, non-invasive way to have the conversation that everyone on the care team has been quietly avoiding — and the language to document what you find so that the next person who touches this patient doesn't have to start from zero. <strong>It is the objective that changes everything else.</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="wiifm-card">
+          <div class="wiifm-card-header">
+            <div class="wiifm-icon">📅</div>
+            <div class="wiifm-header-text">
+              <div class="wiifm-objective-ref">Objective 2 · Construct</div>
+              <div class="wiifm-card-title">A Map for the New Life</div>
+            </div>
+          </div>
+          <div class="wiifm-card-body">
+            <div class="wiifm-academic">Academic language: "Construct a personalized Day One through Week Eight recovery framework."</div>
+            <div class="wiifm-human">What this means for you: <strong>Your patient will leave knowing what a good day looks like — and what a bad day looks like.</strong> That means fewer panic calls at 2am from a caregiver who doesn't know if what they're seeing is normal. It means your patient has a mental framework to say "this isn't how they said it should go" — and knows to call before it becomes an emergency. You give them a map. They stop driving blind.</div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="wiifm-card">
+          <div class="wiifm-card-header">
+            <div class="wiifm-icon">💊</div>
+            <div class="wiifm-header-text">
+              <div class="wiifm-objective-ref">Objective 3 · Analyze</div>
+              <div class="wiifm-card-title">Medications That Actually Work in Real Life</div>
+            </div>
+          </div>
+          <div class="wiifm-card-body">
+            <div class="wiifm-academic">Academic language: "Analyze each patient's complete medication profile including timing, interactions, and access barriers."</div>
+            <div class="wiifm-human">What this means for you: <strong>You will know — before they leave — whether your patient can actually get and take their medications.</strong> Not just whether they understand the dosage. Whether they can afford it next month. Whether their supplement routine will interfere with it. Whether there's a person who can pick it up if they can't. The medication that doesn't get taken is the medication that wasn't really prescribed.</div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="wiifm-card">
+          <div class="wiifm-card-header">
+            <div class="wiifm-icon">📡</div>
+            <div class="wiifm-header-text">
+              <div class="wiifm-objective-ref">Objective 4 · Design</div>
+              <div class="wiifm-card-title">Every Patient Has a Signal</div>
+            </div>
+          </div>
+          <div class="wiifm-card-body">
+            <div class="wiifm-academic">Academic language: "Design a structured check-in plan with each patient's designated Signal."</div>
+            <div class="wiifm-human">What this means for you: <strong>No patient leaves without a named person who is accountable for knowing how they are doing.</strong> Not "a family member." A specific human being with a specific commitment and a specific way to reach the care team. You will know who that person is, how to reach them, and what they've agreed to. That is not paperwork. That is a lifeline.</div>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="wiifm-card">
+          <div class="wiifm-card-header">
+            <div class="wiifm-icon">🫁</div>
+            <div class="wiifm-header-text">
+              <div class="wiifm-objective-ref">Objective 5 · Apply</div>
+              <div class="wiifm-card-title">Taking Care of the Person Taking Care</div>
+            </div>
+          </div>
+          <div class="wiifm-card-body">
+            <div class="wiifm-academic">Academic language: "Apply self-monitoring practices to recognize and communicate capacity limits."</div>
+            <div class="wiifm-human">What this means for you: <strong>You will have the language and the permission to say "I need support" before you're too depleted to say it.</strong> Transplant discharge is the hardest moment in the continuum of care. You are being asked to hold the most complex, most emotionally loaded transition in a patient's life. This objective exists because you cannot pour from an empty vessel — and because the team around you needs to know when you're running low.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- THE SIGNAL -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Introducing — Objective 4 in Practice</div>
+      <h2 class="section-title">Meet <em>The Signal</em></h2>
+      <p>Every patient needs one person who is paying attention after the team goes home. Not a hotline. Not a pamphlet. A human being with a name, a number, and a commitment. We call this person <strong style="color:var(--amber)">The Signal</strong> — because their job is simple and non-negotiable: to send one when something isn't right.</p>
+
+      <div class="signal-block">
+        <div class="signal-left">
+          <div class="signal-name">The Signal</div>
+          <div class="signal-tagline">"The person who keeps the line open."</div>
+          <div class="signal-desc">Not a caregiver in the clinical sense. Not a case manager. A designated, named human being — chosen before discharge — whose role is to stay in contact, pay attention, and know exactly how to reach the care team if anything changes. Before the patient leaves this unit, their Signal is identified, briefed, and on record.</div>
+        </div>
+        <div class="signal-right">
+          <div class="signal-responsibility">
+            <div class="signal-resp-icon">→</div>
+            <div class="signal-resp-text"><strong>Named before discharge.</strong> The Signal is identified and documented as part of the discharge process — not assumed or left to chance.</div>
+          </div>
+          <div class="signal-responsibility">
+            <div class="signal-resp-icon">→</div>
+            <div class="signal-resp-text"><strong>Briefed, not burdened.</strong> The Signal knows what to watch for, who to call, and that asking for help is the right thing to do — not a failure.</div>
+          </div>
+          <div class="signal-responsibility">
+            <div class="signal-resp-icon">→</div>
+            <div class="signal-resp-text"><strong>On the record.</strong> The Signal's name and contact information is part of the patient's discharge documentation — visible to the full care team.</div>
+          </div>
+          <div class="signal-responsibility">
+            <div class="signal-resp-icon">→</div>
+            <div class="signal-resp-text"><strong>If there is no Signal, discharge is not complete.</strong> Finding or building one is part of the care team's responsibility — not the patient's.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING QUOTE -->
+    <div class="closing-quote fade-up">
+      <blockquote>"The objective of education is not to fill a bucket.<br>It is to <span>light a fire</span> — and then make sure there is someone there to tend it."</blockquote>
+      <cite>— Transplant Discharge Wellness Group, Learning Design Principles</cite>
+    </div>
+
+    <div class="page-nav">
+      <a href="the-bridge.html" class="page-nav-btn">← The Bridge</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-brand">Transplant Discharge Wellness Group</span>
+    <p>Confidential — Internal Hospital Training Program</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Banner SVG — night sky with north star
+    const svgBanner = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500">
+      <defs>
+        <radialGradient id="sky" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" style="stop-color:#0e2240"/>
+          <stop offset="100%" style="stop-color:#060e1a"/>
+        </radialGradient>
+        <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style="stop-color:#fff;stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:#fff;stop-opacity:0"/>
+        </radialGradient>
+        <radialGradient id="northGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style="stop-color:#e8b44a;stop-opacity:0.9"/>
+          <stop offset="40%" style="stop-color:#c8922a;stop-opacity:0.4"/>
+          <stop offset="100%" style="stop-color:#c8922a;stop-opacity:0"/>
+        </radialGradient>
+        <filter id="starBlur">
+          <feGaussianBlur stdDeviation="1.5"/>
+        </filter>
+        <filter id="northBlur">
+          <feGaussianBlur stdDeviation="8"/>
+        </filter>
+      </defs>
+
+      <!-- Sky -->
+      <rect width="1600" height="500" fill="url(#sky)"/>
+
+      <!-- Stars scattered -->
+      <g opacity="0.7">
+        <circle cx="120" cy="45" r="1" fill="#fff"/>
+        <circle cx="245" cy="78" r="1.5" fill="#fff"/>
+        <circle cx="380" cy="32" r="1" fill="#fff"/>
+        <circle cx="510" cy="90" r="1" fill="#fff"/>
+        <circle cx="620" cy="55" r="1.5" fill="#fff"/>
+        <circle cx="720" cy="28" r="1" fill="#fff"/>
+        <circle cx="900" cy="65" r="1" fill="#fff"/>
+        <circle cx="1050" cy="40" r="1.5" fill="#fff"/>
+        <circle cx="1180" cy="80" r="1" fill="#fff"/>
+        <circle cx="1320" cy="50" r="1" fill="#fff"/>
+        <circle cx="1450" cy="35" r="1.5" fill="#fff"/>
+        <circle cx="180" cy="140" r="1" fill="#fff" opacity="0.5"/>
+        <circle cx="340" cy="160" r="1" fill="#fff" opacity="0.5"/>
+        <circle cx="480" cy="130" r="1.5" fill="#fff" opacity="0.6"/>
+        <circle cx="660" cy="150" r="1" fill="#fff" opacity="0.4"/>
+        <circle cx="840" cy="120" r="1" fill="#fff" opacity="0.5"/>
+        <circle cx="1000" cy="145" r="1.5" fill="#fff" opacity="0.5"/>
+        <circle cx="1140" cy="130" r="1" fill="#fff" opacity="0.4"/>
+        <circle cx="1380" cy="155" r="1" fill="#fff" opacity="0.5"/>
+        <circle cx="60" cy="200" r="1" fill="#fff" opacity="0.3"/>
+        <circle cx="290" cy="220" r="1" fill="#fff" opacity="0.3"/>
+        <circle cx="430" cy="240" r="1.5" fill="#fff" opacity="0.4"/>
+        <circle cx="570" cy="210" r="1" fill="#fff" opacity="0.3"/>
+        <circle cx="1200" cy="200" r="1" fill="#fff" opacity="0.3"/>
+        <circle cx="1400" cy="230" r="1.5" fill="#fff" opacity="0.4"/>
+        <circle cx="1520" cy="195" r="1" fill="#fff" opacity="0.3"/>
+      </g>
+
+      <!-- North Star glow -->
+      <ellipse cx="800" cy="90" rx="120" ry="80" fill="url(#northGlow)" filter="url(#northBlur)" opacity="0.7"/>
+
+      <!-- North Star rays -->
+      <line x1="800" y1="30" x2="800" y2="155" stroke="#e8b44a" stroke-width="1" opacity="0.4"/>
+      <line x1="735" y1="90" x2="865" y2="90" stroke="#e8b44a" stroke-width="1" opacity="0.4"/>
+      <line x1="750" y1="45" x2="850" y2="135" stroke="#e8b44a" stroke-width="0.8" opacity="0.25"/>
+      <line x1="850" y1="45" x2="750" y2="135" stroke="#e8b44a" stroke-width="0.8" opacity="0.25"/>
+
+      <!-- North Star itself -->
+      <circle cx="800" cy="90" r="6" fill="#fff"/>
+      <circle cx="800" cy="90" r="12" fill="url(#starGlow)" filter="url(#starBlur)" opacity="0.8"/>
+      <circle cx="800" cy="90" r="3" fill="#fffbe0"/>
+
+      <!-- Horizon glow -->
+      <ellipse cx="800" cy="420" rx="700" ry="120" fill="#c8922a" opacity="0.05"/>
+      <ellipse cx="800" cy="460" rx="500" ry="80" fill="#162640" opacity="0.6"/>
+
+      <!-- Silhouette hills -->
+      <path d="M0,420 Q200,340 400,390 Q600,440 800,370 Q1000,300 1200,380 Q1400,440 1600,410 L1600,500 L0,500 Z" fill="#060e1a" opacity="0.8"/>
+      <path d="M0,450 Q300,420 500,440 Q700,460 900,430 Q1100,400 1300,440 Q1500,460 1600,445 L1600,500 L0,500 Z" fill="#0a1628" opacity="0.9"/>
+
+      <!-- Amber horizon line -->
+      <line x1="0" y1="415" x2="1600" y2="415" stroke="#c8922a" stroke-width="0.8" opacity="0.15"/>
+
+      <!-- Top accent -->
+      <rect x="400" y="0" width="800" height="3" fill="#c8922a" opacity="0.35" rx="1"/>
+    </svg>`;
+
+    const blob = new Blob([svgBanner], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    document.getElementById('bannerBg').style.backgroundImage = `url('${url}')`;
+    document.getElementById('bannerBg').style.backgroundSize = 'cover';
+    document.getElementById('bannerBg').style.backgroundPosition = 'center';
+  </script>
+</body>
+</html>
