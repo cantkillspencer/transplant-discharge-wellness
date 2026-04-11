@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Heat Map & Case Studies | Transplant Discharge Wellness Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #162640;
+      --navy-light: #1e3a5f;
+      --amber: #c8922a;
+      --amber-light: #e8b44a;
+      --amber-dim: rgba(200,146,42,0.12);
+      --text: #d0dce8;
+      --muted: #7a9ab8;
+      --border: rgba(200,146,42,0.2);
+      --white: #ffffff;
+      --red: #c8392a;
+      --red-dim: rgba(200,57,42,0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(10,22,40,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.05em;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-links { list-style: none; display: flex; gap: 1.2rem; flex-wrap: nowrap; }
+    .nav-links a {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.3s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+
+    /* ── BANNER ── */
+    .page-banner {
+      position: relative; height: 500px;
+      display: flex; align-items: flex-end;
+      padding: 0 5rem 3.5rem;
+      overflow: hidden; margin-top: 64px;
+    }
+    .banner-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(10,22,40,0.2) 0%, rgba(10,22,40,0.55) 40%,
+        rgba(10,22,40,0.95) 75%, rgba(10,22,40,1) 100%);
+    }
+    .banner-content { position: relative; z-index: 2; max-width: 800px; }
+    .banner-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 900;
+      color: var(--white); line-height: 1; margin-bottom: 1rem;
+    }
+    .banner-title span { color: var(--amber); }
+    .banner-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.1rem;
+      color: var(--muted); line-height: 1.6;
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section { margin-bottom: 5rem; }
+    .amber-rule { width: 60px; height: 2px; background: var(--amber); margin-bottom: 2rem; }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--white); margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--amber); }
+    p { margin-bottom: 1.2rem; font-size: 0.97rem; }
+
+    /* ── HEAT MAP CONTAINER ── */
+    .heatmap-question {
+      background: linear-gradient(135deg, rgba(200,57,42,0.08), rgba(10,22,40,0.9));
+      border: 1px solid rgba(200,57,42,0.3);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .heatmap-q-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 1rem;
+    }
+    .heatmap-q-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--white); line-height: 1.5;
+      max-width: 720px; margin: 0 auto;
+    }
+    .heatmap-q-text em { color: var(--amber); font-style: italic; }
+
+    /* ── THE SPECTRUM ── */
+    .spectrum-wrapper { margin: 3rem 0; }
+    .spectrum-labels {
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+    .spectrum-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .spectrum-label.agree { color: #4aaa7a; }
+    .spectrum-label.disagree { color: var(--red); }
+
+    .spectrum-bar {
+      position: relative;
+      height: 56px;
+      border-radius: 4px;
+      background: linear-gradient(to right,
+        rgba(74,170,122,0.7) 0%,
+        rgba(200,146,42,0.5) 50%,
+        rgba(200,57,42,0.7) 100%);
+      border: 1px solid rgba(200,146,42,0.2);
+      cursor: pointer;
+      overflow: visible;
+    }
+
+    /* Tick marks on spectrum -->*/
+    .spectrum-bar::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 2px;
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-50%);
+    }
+
+    /* Draggable marker -->*/
+    .spectrum-marker {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--amber);
+      cursor: grab;
+      transition: left 0.1s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      z-index: 10;
+      user-select: none;
+    }
+    .spectrum-marker:active { cursor: grabbing; }
+
+    .spectrum-position-label {
+      text-align: center;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--amber);
+      font-weight: 500;
+      min-height: 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    /* ── STANCE CARDS ── */
+    .stance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .stance-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .stance-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stance-card.green::before { background: #4aaa7a; }
+    .stance-card.amber::before { background: var(--amber); }
+    .stance-card.red::before { background: var(--red); }
+    .stance-card:hover { border-color: var(--amber); transform: translateY(-3px); }
+
+    .stance-voice {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .stance-card.green .stance-voice { color: #4aaa7a; }
+    .stance-card.amber .stance-voice { color: var(--amber); }
+    .stance-card.red .stance-voice { color: var(--red); }
+
+    .stance-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .stance-argument {
+      font-size: 0.84rem; color: var(--text);
+      line-height: 1.6; font-style: italic;
+    }
+    .stance-counter {
+      font-size: 0.78rem; color: var(--muted);
+      line-height: 1.5; margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(200,146,42,0.1);
+    }
+
+    /* ── HEAT MAP RULES ── */
+    .heatmap-rules {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      margin: 2rem 0;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .rule-item {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+    }
+    .rule-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 900;
+      color: var(--amber); flex-shrink: 0;
+      line-height: 1.2;
+    }
+    .rule-text {
+      font-size: 0.88rem; color: var(--text); line-height: 1.6;
+    }
+    .rule-text strong { color: var(--white); }
+
+    /* ── THE CLOCK ── */
+    .clock-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+    }
+    .clock-cell {
+      background: var(--navy-mid);
+      padding: 1.4rem;
+      text-align: center;
+    }
+    .clock-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--amber); display: block;
+      margin-bottom: 0.3rem;
+    }
+    .clock-label {
+      font-size: 0.72rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.15em;
+    }
+    .clock-cell.danger .clock-time { color: var(--red); }
+    .clock-cell.danger { background: rgba(200,57,42,0.06); }
+
+    /* ── PATIENT FILE ── */
+    .patient-file {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .file-header {
+      background: rgba(200,146,42,0.12);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .file-header-title {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--amber);
+    }
+    .file-header-stamp {
+      font-size: 0.68rem; color: var(--muted);
+      font-style: italic;
+    }
+    .file-body {
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .file-section-title {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.8rem;
+    }
+    .file-field {
+      margin-bottom: 0.7rem;
+    }
+    .file-field-label {
+      font-size: 0.72rem; color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .file-field-value {
+      font-size: 0.9rem; color: var(--white);
+      line-height: 1.5;
+    }
+    .file-field-value.warning {
+      color: #e8a040;
+    }
+    .file-field-value.critical {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    /* ── PROBLEM CARDS (timed) ── */
+    .problems-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white); margin: 2rem 0 1.2rem;
+    }
+
+    .problem-stack { display: flex; flex-direction: column; gap: 0.8rem; }
+
+    .problem-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1.2rem;
+      align-items: start;
+      transition: border-color 0.3s;
+    }
+    .problem-card:hover { border-color: var(--amber); }
+    .problem-card.critical { border-left: 3px solid var(--red); }
+    .problem-card.warning { border-left: 3px solid #e8a040; }
+    .problem-card.flag { border-left: 3px solid var(--amber); }
+
+    .problem-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--amber); line-height: 1.2;
+      text-align: center;
+    }
+    .problem-time small {
+      display: block;
+      font-size: 0.6rem; font-weight: 400;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+
+    .problem-content {}
+    .problem-headline {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.4rem;
+    }
+    .problem-detail {
+      font-size: 0.84rem; color: var(--text); line-height: 1.5;
+    }
+
+    .problem-badge {
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem; border-radius: 20px;
+      white-space: nowrap; align-self: start;
+    }
+    .problem-badge.critical {
+      background: rgba(200,57,42,0.15);
+      color: var(--red);
+      border: 1px solid rgba(200,57,42,0.3);
+    }
+    .problem-badge.warning {
+      background: rgba(232,160,64,0.15);
+      color: #e8a040;
+      border: 1px solid rgba(232,160,64,0.3);
+    }
+    .problem-badge.flag {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid var(--border);
+    }
+
+    /* ── DECISION PROMPTS ── */
+    .decision-block {
+      background: linear-gradient(135deg, rgba(200,146,42,0.08), rgba(10,22,40,0.9));
+      border: 1px solid rgba(200,146,42,0.35);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .decision-prompt {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem; color: var(--white);
+      line-height: 1.7;
+      border-left: 3px solid var(--amber);
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .decision-questions { list-style: none; }
+    .decision-questions li {
+      font-size: 0.9rem; color: var(--text);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(200,146,42,0.08);
+      display: flex; gap: 0.8rem;
+      line-height: 1.6;
+    }
+    .decision-questions li::before {
+      content: '→';
+      color: var(--amber); flex-shrink: 0; font-weight: 600;
+    }
+    .decision-questions li:last-child { border-bottom: none; }
+
+    /* ── DEBRIEF ── */
+    .debrief-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .debrief-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem;
+    }
+    .debrief-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.8rem;
+    }
+    .debrief-card-body {
+      font-size: 0.86rem; color: var(--text);
+      line-height: 1.7;
+    }
+    .debrief-card-body strong { color: var(--amber); }
+
+    /* ── CLOSING QUOTE ── */
+    .closing-quote {
+      text-align: center; padding: 4rem 2rem;
+      border-top: 1px solid var(--border); margin-top: 3rem;
+    }
+    .closing-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.5rem; font-weight: 700;
+      color: var(--white); line-height: 1.5;
+      max-width: 720px; margin: 0 auto 1rem;
+    }
+    .closing-quote blockquote span { color: var(--amber); }
+    .closing-quote cite {
+      font-size: 0.78rem; color: var(--muted);
+      letter-spacing: 0.15em; text-transform: uppercase;
+    }
+
+    /* ── PAGE NAV ── */
+    .page-nav {
+      display: flex; justify-content: space-between;
+      padding: 2.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+    .page-nav-btn {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; transition: opacity 0.2s;
+    }
+    .page-nav-btn:hover { opacity: 0.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(6,14,26,0.95);
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--white); }
+    footer p { font-size: 0.75rem; color: var(--muted); margin: 0; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Transplant Discharge Wellness Group</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="whos-invited.html">Who's Invited</a></li>
+      <li><a href="before-you-arrive.html">Before You Arrive</a></li>
+      <li><a href="facilitation.html">How This Room Works</a></li>
+      <li><a href="learning-environment.html">The Learning Environment</a></li>
+      <li><a href="point-of-care.html">The Point of Care</a></li>
+      <li><a href="the-bridge.html">The Bridge</a></li>
+      <li><a href="north-star.html">The North Star</a></li>
+      <li><a href="heat-map.html" class="active">The Heat Map</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-banner">
+    <div class="banner-bg" id="bannerBg"></div>
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <p class="banner-eyebrow fade-up">Controversy Design & Problem-Centered Learning</p>
+      <h1 class="banner-title fade-up delay-1">The <span>Heat Map</span><br>& Case Studies</h1>
+      <p class="banner-sub fade-up delay-2">Where the room stops agreeing — and starts telling the truth. Where theory ends and the clock starts.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- INTRO -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Why Controversy Belongs in This Room</div>
+      <h2 class="section-title">Good controversy is <em>designed.</em></h2>
+      <p>Parker calls it "good controversy" — not conflict for its own sake, but a structured moment where the room has to take a stand on something that actually matters, live with the discomfort of disagreement, and listen to the person across from them with genuine curiosity rather than the quiet certainty that they are right.</p>
+      <p>In this room, good controversy has a specific purpose. It surfaces the unspoken disagreements that already exist on the care team — the ones that play out silently at the bedside every time a patient is discharged without a plan. If we can name them here, we can resolve them before they cost someone their life.</p>
+    </div>
+
+    <!-- HEAT MAP ACTIVITY -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Artifact One — The Controversy Design</div>
+      <h2 class="section-title">The <em>Heat Map</em> Activity</h2>
+      <p>A Heat Map places a single provocative question at the center of the room and asks every person — regardless of title or tenure — to take a position on a spectrum from strong agreement to strong disagreement. Then it asks them to defend it. Not to win. To be understood.</p>
+
+      <!-- THE QUESTION -->
+      <div class="heatmap-question">
+        <div class="heatmap-q-label">The Heat Map Question</div>
+        <div class="heatmap-q-text">
+          "When a transplant patient's family cannot or will not provide support after discharge — <em>whose responsibility is it to find an alternative?</em>"
+        </div>
+      </div>
+
+      <!-- INTERACTIVE SPECTRUM -->
+      <div class="spectrum-wrapper">
+        <div class="spectrum-labels">
+          <span class="spectrum-label agree">← Entirely the care team's responsibility</span>
+          <span class="spectrum-label disagree">Entirely the patient's responsibility →</span>
+        </div>
+        <div class="spectrum-bar" id="spectrumBar">
+          <div class="spectrum-marker" id="spectrumMarker">👤</div>
+        </div>
+        <div class="spectrum-position-label" id="spectrumLabel">Drag the marker to take your position.</div>
+      </div>
+
+      <!-- THREE VOICES -->
+      <p style="margin-bottom:1.5rem;">These are the three positions the room will typically fracture into. None of them are wrong. All of them are incomplete on their own.</p>
+
+      <div class="stance-grid">
+        <div class="stance-card green">
+          <div class="stance-voice">Voice One · The Advocate</div>
+          <div class="stance-title">"This is entirely on us. We knew. We signed."</div>
+          <div class="stance-argument">"If I discharge a patient knowing they have no support and no plan, I am not done with my job. I have just started the next crisis. The moment we knew the family wasn't coming, the care team's responsibility began — not ended."</div>
+          <div class="stance-counter">Challenge: At what point does advocacy become enabling a system that never builds the infrastructure to solve this properly?</div>
+        </div>
+        <div class="stance-card amber">
+          <div class="stance-voice">Voice Two · The Pragmatist</div>
+          <div class="stance-title">"It's shared — but the system has to hold its end."</div>
+          <div class="stance-argument">"I can identify the gap. I can escalate. I can document. But I cannot manufacture a support system that doesn't exist. My responsibility is to surface the problem loudly enough that someone with authority to fix it has to respond."</div>
+          <div class="stance-counter">Challenge: Who decides what "loud enough" means — and what happens when no one responds?</div>
+        </div>
+        <div class="stance-card red">
+          <div class="stance-voice">Voice Three · The Realist</div>
+          <div class="stance-title">"We were never trained for this. That's the real problem."</div>
+          <div class="stance-argument">"I went to nursing school. I was trained to manage a liver, not a family system. Asking me to assess family dynamics and build alternative support networks without training, time, or resources is setting me up to fail — and then blaming me when I do."</div>
+          <div class="stance-counter">Challenge: Is the absence of training an explanation — or an argument for why this training exists?</div>
+        </div>
+      </div>
+
+      <!-- RULES OF ENGAGEMENT -->
+      <div class="heatmap-rules">
+        <div class="eyebrow">Rules of Engagement</div>
+        <p style="font-size:0.9rem; margin-bottom:0;">The Heat Map is not a debate. It is not a vote. It is a structured listening exercise with a single goal: every person in the room understands why someone they respect holds a position they disagree with.</p>
+        <div class="rules-grid">
+          <div class="rule-item">
+            <div class="rule-num">1</div>
+            <div class="rule-text"><strong>Place yourself on the spectrum.</strong> Stand where you actually stand — not where you think you should stand.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">2</div>
+            <div class="rule-text"><strong>Speak for yourself.</strong> "I believe" not "everyone knows." Your position, your words.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">3</div>
+            <div class="rule-text"><strong>Listen to move.</strong> If someone says something that genuinely shifts your thinking, move on the spectrum. That is not weakness. That is the point.</div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">4</div>
+            <div class="rule-text"><strong>The facilitator names the pattern.</strong> At the end, the room identifies where the disagreement actually lives — and what that means for the patient.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE 11TH HOUR -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">Artifact Two — The Problem-Centered Task</div>
+      <h2 class="section-title">The <em>11th Hour</em></h2>
+      <p>This is not a case study you read and discuss. It is a simulation you live inside. You are handed a patient file at 9:00am. Discharge is scheduled for noon. As you work through the file, problems surface — one by one, then all at once. The clock is running. The question is not what the right answer is. The question is what you do first.</p>
+      <p style="font-size:0.88rem; color:var(--muted); font-style:italic;">The patient is a composite. The problems are not.</p>
+
+      <!-- CLOCK -->
+      <div class="clock-strip">
+        <div class="clock-cell">
+          <span class="clock-time">9:00</span>
+          <span class="clock-label">You receive the file</span>
+        </div>
+        <div class="clock-cell">
+          <span class="clock-time">10:00</span>
+          <span class="clock-label">First problems surface</span>
+        </div>
+        <div class="clock-cell">
+          <span class="clock-time">11:00</span>
+          <span class="clock-label">Decision point</span>
+        </div>
+        <div class="clock-cell danger">
+          <span class="clock-time">12:00</span>
+          <span class="clock-label">Discharge. Ready or not.</span>
+        </div>
+      </div>
+
+      <!-- PATIENT FILE -->
+      <div class="patient-file">
+        <div class="file-header">
+          <span class="file-header-title">Patient Discharge File — Composite Case</span>
+          <span class="file-header-stamp">Confidential · Training Use Only</span>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-section-title">Patient Overview</div>
+            <div class="file-field">
+              <div class="file-field-label">Name</div>
+              <div class="file-field-value">M. Rivera, 54</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Procedure</div>
+              <div class="file-field-value">Orthotopic liver transplant, Day 14 post-op</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Recovery status</div>
+              <div class="file-field-value">Stable. Cleared for discharge by attending.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Primary diagnosis</div>
+              <div class="file-field-value">End-stage liver disease secondary to alcohol-related cirrhosis. 8 years sobriety documented.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Living situation</div>
+              <div class="file-field-value warning">Lives alone. Adult daughter listed as emergency contact. Relationship described as "estranged — working on it."</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Signal (discharge partner)</div>
+              <div class="file-field-value critical">NOT IDENTIFIED</div>
+            </div>
+          </div>
+          <div>
+            <div class="file-section-title">Discharge Readiness</div>
+            <div class="file-field">
+              <div class="file-field-label">Medication review completed</div>
+              <div class="file-field-value warning">Verbal only. No show-me demonstration documented.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Tacrolimus (primary immunosuppressant)</div>
+              <div class="file-field-value critical">30-day supply. Cost: $890 without insurance. Patient's coverage lapsed 6 days ago. Unresolved.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">St. John's Wort</div>
+              <div class="file-field-value critical">Patient reports taking daily for mood. Contraindicated with tacrolimus. Not previously flagged.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">72-hour plan</div>
+              <div class="file-field-value warning">Not completed. Scheduled for "discharge day review."</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Follow-up appointment</div>
+              <div class="file-field-value">Transplant clinic, 7 days. Patient has no car. Transportation unconfirmed.</div>
+            </div>
+            <div class="file-field">
+              <div class="file-field-label">Discharge paperwork</div>
+              <div class="file-field-value warning">Printed. Not reviewed with patient.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROBLEM STACK -->
+      <div class="problems-title">Problems surface as you read. The clock is still running.</div>
+
+      <div class="problem-stack">
+        <div class="problem-card flag">
+          <div class="problem-time">9:12<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">No Signal identified</div>
+            <div class="problem-detail">The discharge partner field is blank. The attending cleared him for discharge. No one flagged this. The adult daughter is listed as an emergency contact but has not been contacted by the care team and has not confirmed she will be present.</div>
+          </div>
+          <div class="problem-badge flag">Ownership Gap</div>
+        </div>
+
+        <div class="problem-card critical">
+          <div class="problem-time">9:28<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">Insurance lapsed. Primary medication unaffordable.</div>
+            <div class="problem-detail">Tacrolimus is not optional. Without it, rejection is a matter of time. The patient's coverage lapsed six days ago. No one caught it. He has $140 in his account. The pharmacy will not dispense without payment or active coverage.</div>
+          </div>
+          <div class="problem-badge critical">Critical</div>
+        </div>
+
+        <div class="problem-card critical">
+          <div class="problem-time">9:41<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">St. John's Wort — contraindication not flagged</div>
+            <div class="problem-detail">During your medication review, the patient mentions he takes St. John's Wort every morning for his mood. It significantly reduces tacrolimus blood levels. He has been taking it for two years. It is not listed anywhere in his chart. He did not think it was a "real medication."</div>
+          </div>
+          <div class="problem-badge critical">Critical</div>
+        </div>
+
+        <div class="problem-card warning">
+          <div class="problem-time">10:15<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">72-hour plan does not exist</div>
+            <div class="problem-detail">The plan was scheduled for "discharge day." It is discharge day. The patient does not know what his first morning at home should look like. He does not know what a bad sign looks like versus a normal post-transplant symptom. He is about to go home alone.</div>
+          </div>
+          <div class="problem-badge warning">Planning Gap</div>
+        </div>
+
+        <div class="problem-card warning">
+          <div class="problem-time">10:52<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">No transportation to follow-up appointment</div>
+            <div class="problem-detail">The transplant clinic appointment is in 7 days. The patient has no car and did not arrange transportation because he assumed his daughter would help. He has not spoken to his daughter in 11 days. He does not know if she is coming today.</div>
+          </div>
+          <div class="problem-badge warning">Logistics Gap</div>
+        </div>
+
+        <div class="problem-card flag">
+          <div class="problem-time">11:34<small>am</small></div>
+          <div class="problem-content">
+            <div class="problem-headline">Patient says: "I'll be fine. I just want to go home."</div>
+            <div class="problem-detail">He is tired. He has been here for 14 days. He is nodding at everything you say. You are not certain he has absorbed any of it. He is smiling. He is also terrified. He will not say so.</div>
+          </div>
+          <div class="problem-badge flag">Readiness Gap</div>
+        </div>
+      </div>
+
+      <!-- DECISION PROMPTS -->
+      <div class="decision-block">
+        <div class="eyebrow">It is now 11:34am. Discharge is in 26 minutes.</div>
+        <div class="decision-prompt">"You cannot solve all of this in 26 minutes. Some of it you may not be able to solve at all. The question is not what the perfect answer is. The question is: what do you do first — and what are you willing to put your name on?"</div>
+        <ul class="decision-questions">
+          <li>Which of these problems, if unresolved, puts M. Rivera's life at immediate risk? Start there.</li>
+          <li>Which problems can you escalate — and to whom, specifically? Who has the authority to delay this discharge?</li>
+          <li>What do you document, and how do you document it, so that the next person who touches this patient doesn't start from zero?</li>
+          <li>The patient wants to leave. He is legally competent. He has the right to go. What is your obligation when a patient's autonomy conflicts with their safety?</li>
+          <li>If you had seen this file yesterday, what would you have done differently? What system failed to give you that chance?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DEBRIEF -->
+    <div class="section fade-up">
+      <div class="amber-rule"></div>
+      <div class="eyebrow">After the Simulation — The Debrief</div>
+      <h2 class="section-title">What the room learned by doing.</h2>
+      <p>The debrief is where the simulation becomes training. These four questions guide the conversation from what happened in the room to what will happen differently at the bedside.</p>
+
+      <div class="debrief-grid">
+        <div class="debrief-card">
+          <div class="debrief-card-title">What did you prioritize — and why?</div>
+          <div class="debrief-card-body">There is no single right answer to the order of operations. But there is a right conversation about it. <strong>Surface the reasoning, not just the decision.</strong> The medication crisis and the contraindication are life-threatening. Did the room go there first?</div>
+        </div>
+        <div class="debrief-card">
+          <div class="debrief-card-title">Where did the system fail M. Rivera?</div>
+          <div class="debrief-card-body">The insurance lapse was six days old. The supplement was two years old. The 72-hour plan was never started. <strong>None of these were discovered at 9am because of a bad nurse.</strong> They were discovered because no system existed to catch them earlier.</div>
+        </div>
+        <div class="debrief-card">
+          <div class="debrief-card-title">What would The Signal have changed?</div>
+          <div class="debrief-card-body">If the daughter had been identified and briefed two weeks ago, she would have known to be there. She might have known about the insurance. She might have known about the St. John's Wort. <strong>The Signal is not a luxury. It is a clinical intervention.</strong></div>
+        </div>
+        <div class="debrief-card">
+          <div class="debrief-card-title">What do you do differently on Monday?</div>
+          <div class="debrief-card-body">Not theoretically. Specifically. <strong>One thing. Named. Committed to out loud.</strong> The debrief ends when every person in the room has said one concrete thing they will do differently the next time they are preparing a patient for discharge.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING QUOTE -->
+    <div class="closing-quote fade-up">
+      <blockquote>"A problem is not a problem until someone <span>owns it.</span><br>Until then, it is just a fact waiting to become a crisis."</blockquote>
+      <cite>— Transplant Discharge Wellness Group</cite>
+    </div>
+
+    <div class="page-nav">
+      <a href="north-star.html" class="page-nav-btn">← The North Star</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-brand">Transplant Discharge Wellness Group</span>
+    <p>Confidential — Internal Hospital Training Program</p>
+  </footer>
+
+  <script>
+    // Fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Interactive spectrum drag
+    const bar = document.getElementById('spectrumBar');
+    const marker = document.getElementById('spectrumMarker');
+    const label = document.getElementById('spectrumLabel');
+
+    const positions = [
+      { pct: 10, text: "The care team owns this. Full stop." },
+      { pct: 25, text: "Primarily the care team's responsibility." },
+      { pct: 40, text: "Mostly ours, with system support." },
+      { pct: 50, text: "Shared responsibility — it depends." },
+      { pct: 60, text: "Mostly systemic — not individual." },
+      { pct: 75, text: "Primarily the patient's responsibility." },
+      { pct: 90, text: "The patient owns this. We document and move on." },
+    ];
+
+    let isDragging = false;
+
+    function updateMarker(pct) {
+      pct = Math.max(5, Math.min(95, pct));
+      marker.style.left = pct + '%';
+      const closest = positions.reduce((a, b) =>
+        Math.abs(b.pct - pct) < Math.abs(a.pct - pct) ? b : a
+      );
+      label.textContent = closest.text;
+      // Color the label based on position
+      if (pct < 35) label.style.color = '#4aaa7a';
+      else if (pct > 65) label.style.color = '#c8392a';
+      else label.style.color = '#c8922a';
+    }
+
+    marker.addEventListener('mousedown', () => isDragging = true);
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const rect = bar.getBoundingClientRect();
+      const pct = ((e.clientX - rect.left) / rect.width) * 100;
+      updateMarker(pct);
+    });
+
+    // Touch support
+    marker.addEventListener('touchstart', () => isDragging = true);
+    document.addEventListener('touchend', () => isDragging = false);
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const rect = bar.getBoundingClientRect();
+      const pct = ((e.touches[0].clientX - rect.left) / rect.width) * 100;
+      updateMarker(pct);
+    });
+
+    // Banner SVG — heat/tension visual
+    const svgBanner = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0c1e35"/>
+          <stop offset="100%" style="stop-color:#0a1628"/>
+        </linearGradient>
+        <radialGradient id="heatLeft" cx="20%" cy="60%" r="40%">
+          <stop offset="0%" style="stop-color:#4aaa7a;stop-opacity:0.15"/>
+          <stop offset="100%" style="stop-color:#4aaa7a;stop-opacity:0"/>
+        </radialGradient>
+        <radialGradient id="heatRight" cx="80%" cy="60%" r="40%">
+          <stop offset="0%" style="stop-color:#c8392a;stop-opacity:0.15"/>
+          <stop offset="100%" style="stop-color:#c8392a;stop-opacity:0"/>
+        </radialGradient>
+        <radialGradient id="heatCenter" cx="50%" cy="55%" r="30%">
+          <stop offset="0%" style="stop-color:#c8922a;stop-opacity:0.12"/>
+          <stop offset="100%" style="stop-color:#c8922a;stop-opacity:0"/>
+        </radialGradient>
+      </defs>
+
+      <rect width="1600" height="500" fill="url(#bg)"/>
+      <rect width="1600" height="500" fill="url(#heatLeft)"/>
+      <rect width="1600" height="500" fill="url(#heatRight)"/>
+      <rect width="1600" height="500" fill="url(#heatCenter)"/>
+
+      <!-- Spectrum line across the middle -->
+      <line x1="100" y1="280" x2="1500" y2="280" stroke="#c8922a" stroke-width="2" opacity="0.3"/>
+      <line x1="100" y1="280" x2="560" y2="280" stroke="#4aaa7a" stroke-width="3" opacity="0.5"/>
+      <line x1="1040" y1="280" x2="1500" y2="280" stroke="#c8392a" stroke-width="3" opacity="0.5"/>
+
+      <!-- Left anchor - AGREE -->
+      <circle cx="100" cy="280" r="10" fill="#4aaa7a" opacity="0.8"/>
+      <text x="120" y="270" font-family="Georgia,serif" font-size="12" fill="#4aaa7a" opacity="0.7" letter-spacing="2">CARE TEAM OWNS IT</text>
+
+      <!-- Right anchor - DISAGREE -->
+      <circle cx="1500" cy="280" r="10" fill="#c8392a" opacity="0.8"/>
+      <text x="1250" y="270" font-family="Georgia,serif" font-size="12" fill="#c8392a" opacity="0.7" letter-spacing="2">PATIENT OWNS IT</text>
+
+      <!-- People positioned on the spectrum -->
+      <!-- Person far left -->
+      <g transform="translate(160, 190)">
+        <ellipse cx="20" cy="18" rx="16" ry="18" fill="#2a5a4a" opacity="0.9"/>
+        <rect x="4" y="36" width="32" height="50" rx="6" fill="#1a4a3a"/>
+        <ellipse cx="20" cy="17" rx="13" ry="14" fill="#c8a080"/>
+        <line x1="20" y1="86" x2="20" y2="280" stroke="#4aaa7a" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+      </g>
+
+      <!-- Person left-center -->
+      <g transform="translate(420, 185)">
+        <ellipse cx="20" cy="18" rx="16" ry="18" fill="#1a4a6a" opacity="0.9"/>
+        <rect x="4" y="36" width="32" height="50" rx="6" fill="#1a3a5a"/>
+        <ellipse cx="20" cy="17" rx="13" ry="14" fill="#e8b890"/>
+        <line x1="20" y1="86" x2="20" y2="280" stroke="#c8922a" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+      </g>
+
+      <!-- Person center - slightly raised, more prominent -->
+      <g transform="translate(770, 165)">
+        <ellipse cx="25" cy="22" rx="20" ry="22" fill="#2a4a7a" opacity="0.9"/>
+        <rect x="5" y="44" width="40" height="62" rx="8" fill="#1e3a6a"/>
+        <ellipse cx="25" cy="21" rx="16" ry="17" fill="#d4906a"/>
+        <line x1="25" y1="106" x2="25" y2="280" stroke="#c8922a" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>
+        <!-- Speech bubble -->
+        <rect x="-40" y="-45" width="130" height="32" rx="6" fill="#1a3a5a" opacity="0.9" stroke="#c8922a" stroke-width="1"/>
+        <polygon points="15,-13 25,2 35,-13" fill="#1a3a5a" opacity="0.9"/>
+        <text x="-28" y="-24" font-family="Georgia,serif" font-size="10" fill="#c8922a" font-style="italic">"It depends on the case."</text>
+      </g>
+
+      <!-- Person right-center -->
+      <g transform="translate(1100, 188)">
+        <ellipse cx="20" cy="18" rx="16" ry="18" fill="#5a1a2a" opacity="0.9"/>
+        <rect x="4" y="36" width="32" height="50" rx="6" fill="#4a1a2a"/>
+        <ellipse cx="20" cy="17" rx="13" ry="14" fill="#5a2a18"/>
+        <line x1="20" y1="86" x2="20" y2="280" stroke="#c8392a" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+      </g>
+
+      <!-- Person far right -->
+      <g transform="translate(1380, 192)">
+        <ellipse cx="20" cy="18" rx="16" ry="18" fill="#3a1a1a" opacity="0.9"/>
+        <rect x="4" y="36" width="32" height="50" rx="6" fill="#3a1a2a"/>
+        <ellipse cx="20" cy="17" rx="13" ry="14" fill="#c87a50"/>
+        <line x1="20" y1="86" x2="20" y2="280" stroke="#c8392a" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+      </g>
+
+      <!-- Tension lines between people -->
+      <line x1="200" y1="225" x2="440" y2="215" stroke="#c8922a" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+      <line x1="460" y1="215" x2="790" y2="210" stroke="#c8922a" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+      <line x1="820" y1="210" x2="1120" y2="218" stroke="#c8922a" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+      <line x1="1140" y1="218" x2="1400" y2="222" stroke="#c8922a" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+
+      <!-- Top accent -->
+      <rect x="400" y="0" width="800" height="3" fill="#c8922a" opacity="0.4" rx="1"/>
+    </svg>`;
+
+    const blob = new Blob([svgBanner], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    document.getElementById('bannerBg').style.backgroundImage = `url('${url}')`;
+    document.getElementById('bannerBg').style.backgroundSize = 'cover';
+    document.getElementById('bannerBg').style.backgroundPosition = 'center';
+  </script>
+</body>
+</html>
