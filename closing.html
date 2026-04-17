@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Closing & Implementation | Transplant Discharge Wellness Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky: #e8f4fd;
+      --sky-mid: #d0eaf8;
+      --sky-deep: #a8d8f0;
+      --azure: #4a9ec8;
+      --azure-deep: #2a7aaa;
+      --azure-darkest: #1a4a6a;
+      --gold: #e8b840;
+      --gold-deep: #c8922a;
+      --gold-pale: #f5e070;
+      --gold-white: #fffbe0;
+      --text: #1a3a5a;
+      --text-mid: #2a5a7a;
+      --text-light: #5a8aaa;
+      --border: rgba(74,158,200,0.2);
+      --border-strong: rgba(74,158,200,0.35);
+      --white: #ffffff;
+      --warm-shadow: rgba(232,184,64,0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--sky);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(232,244,253,0.97);
+      border-bottom: 1px solid var(--border-strong);
+      backdrop-filter: blur(8px);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--azure-darkest); letter-spacing: 0.05em;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-links { list-style: none; display: flex; gap: 1.2rem; flex-wrap: nowrap; }
+    .nav-links a {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-light); text-decoration: none;
+      transition: color 0.3s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--azure); }
+
+    /* ── BANNER ── */
+    .page-banner {
+      position: relative; height: 580px;
+      display: flex; align-items: flex-end;
+      padding: 0 5rem 4rem;
+      overflow: hidden; margin-top: 64px;
+    }
+
+    /* The animated sunrise canvas */
+    #sunriseCanvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+
+    .banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(232,244,253,0) 0%,
+        rgba(232,244,253,0.1) 40%,
+        rgba(232,244,253,0.88) 72%,
+        rgba(232,244,253,1) 100%);
+    }
+    .banner-content { position: relative; z-index: 2; max-width: 800px; }
+    .banner-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--azure); margin-bottom: 1rem;
+    }
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 900;
+      color: var(--text); line-height: 1.05; margin-bottom: 1rem;
+    }
+    .banner-title span { color: var(--gold-deep); }
+    .banner-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1.15rem;
+      color: var(--text-mid); line-height: 1.6;
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section { margin-bottom: 5rem; }
+    .gold-rule { width: 60px; height: 2px; background: var(--gold-deep); margin-bottom: 2rem; }
+    .eyebrow {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--azure); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--text); margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--gold-deep); }
+    p { margin-bottom: 1.2rem; font-size: 0.97rem; color: var(--text-mid); }
+
+    /* ── PARKER BLOCK ── */
+    .parker-block {
+      background: rgba(74,158,200,0.07);
+      border-left: 4px solid var(--azure);
+      border-radius: 0 8px 8px 0;
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+    }
+    .parker-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem; color: var(--text);
+      line-height: 1.7; margin-bottom: 0.8rem;
+    }
+    .parker-cite {
+      font-size: 0.78rem; color: var(--text-light);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* ── CEREMONY INTRO ── */
+    .ceremony-intro {
+      background: linear-gradient(135deg, rgba(232,184,64,0.1), rgba(232,244,253,0.8));
+      border: 1px solid rgba(232,184,64,0.3);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .ceremony-intro-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--text);
+      line-height: 1.8; max-width: 680px; margin: 0 auto;
+    }
+    .ceremony-intro-text em { color: var(--azure); font-style: italic; }
+
+    /* ── PART ONE ── */
+    .part-one {
+      background: var(--white);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px var(--warm-shadow);
+      margin: 2rem 0;
+    }
+    .part-header {
+      background: linear-gradient(135deg, var(--azure-deep), var(--azure));
+      padding: 1.6rem 2.5rem;
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .part-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--white); flex-shrink: 0;
+    }
+    .part-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); margin-bottom: 0.2rem;
+    }
+    .part-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+    }
+    .part-body { padding: 2.5rem; }
+
+    .direction-card {
+      background: var(--sky);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem 1.8rem;
+      margin-bottom: 1.2rem;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .direction-step {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--azure); text-transform: uppercase;
+      letter-spacing: 0.15em; line-height: 1.4; text-align: center;
+    }
+    .direction-text {
+      font-size: 0.92rem; color: var(--text-mid); line-height: 1.7;
+    }
+    .direction-text strong { color: var(--text); font-weight: 600; }
+    .direction-text em { color: var(--azure); font-style: italic; }
+
+    /* Reflection card */
+    .reflection-card {
+      background: linear-gradient(135deg, rgba(232,184,64,0.07), rgba(232,244,253,0.8));
+      border: 1px solid rgba(232,184,64,0.25);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 1.5rem 0;
+    }
+    .reflection-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text); margin-bottom: 1.5rem; text-align: center;
+    }
+    .reflection-prompts { display: flex; flex-direction: column; gap: 1rem; }
+    .reflection-prompt {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .prompt-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .prompt-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem; color: var(--text); line-height: 1.6;
+    }
+    .prompt-subtext {
+      font-size: 0.78rem; color: var(--text-light);
+      margin-top: 0.3rem; font-style: normal;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Personal oath */
+    .oath-card {
+      background: var(--white);
+      border: 2px solid var(--azure);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .oath-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--azure-deep), var(--gold), var(--azure-deep));
+    }
+    .oath-eyebrow {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--azure); margin-bottom: 1.2rem;
+    }
+    .oath-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--text);
+      line-height: 1.9; max-width: 600px; margin: 0 auto 1.5rem;
+    }
+    .oath-text em { color: var(--gold-deep); font-style: italic; }
+    .oath-instruction { font-size: 0.82rem; color: var(--text-light); font-style: italic; }
+
+    /* ── THE WELDING ── */
+    .welding-section {
+      background: linear-gradient(135deg, var(--azure-darkest), #0d2a40);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 2rem 0;
+      box-shadow: 0 8px 40px rgba(26,74,106,0.25);
+      position: relative;
+    }
+
+    /* Animated sunbeam inside welding section */
+    .welding-sunbeam {
+      position: absolute; inset: 0;
+      overflow: hidden; pointer-events: none;
+    }
+    .welding-ray {
+      position: absolute;
+      bottom: -50px; left: 50%;
+      width: 2px;
+      background: linear-gradient(to top, rgba(232,184,64,0.4), transparent);
+      transform-origin: bottom center;
+    }
+
+    .welding-header {
+      background: rgba(232,184,64,0.08);
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid rgba(232,184,64,0.2);
+      display: flex; align-items: center; gap: 1.2rem;
+      position: relative; z-index: 2;
+    }
+    .welding-header .part-num {
+      border-color: rgba(232,184,64,0.5);
+      background: rgba(232,184,64,0.1);
+      color: var(--gold);
+    }
+    .welding-header .part-label { color: rgba(232,184,64,0.7); }
+    .welding-header .part-title { color: var(--white); }
+
+    .welding-body { padding: 2.5rem; position: relative; z-index: 2; }
+    .welding-body p { color: #c0d8e8; }
+
+    /* Chain visual */
+    .chain-visual {
+      display: flex; align-items: center;
+      justify-content: center;
+      gap: 0; margin: 2.5rem 0; flex-wrap: nowrap; overflow-x: auto;
+    }
+    .chain-link {
+      width: 60px; height: 60px; flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(232,184,64,0.1);
+      border: 2px solid rgba(232,184,64,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold); text-align: center; line-height: 1.3;
+    }
+    .chain-connector {
+      width: 30px; height: 3px; flex-shrink: 0;
+      background: linear-gradient(to right, rgba(232,184,64,0.3), rgba(232,184,64,0.7), rgba(232,184,64,0.3));
+    }
+    .chain-link.lit {
+      background: rgba(232,184,64,0.2);
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(232,184,64,0.4);
+      color: var(--gold-pale);
+      animation: glow-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(232,184,64,0.2); }
+      50% { box-shadow: 0 0 24px rgba(232,184,64,0.6); }
+    }
+
+    /* Team oath */
+    .team-oath {
+      background: rgba(232,184,64,0.06);
+      border: 1px solid rgba(232,184,64,0.25);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .team-oath-eyebrow {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .team-oath-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white); line-height: 1.8;
+      max-width: 700px; margin: 0 auto 1.2rem;
+    }
+    .team-oath-text em { color: var(--gold); font-style: italic; }
+    .team-oath-instruction { font-size: 0.82rem; color: rgba(232,184,64,0.5); font-style: italic; }
+
+    /* Starting line */
+    .starting-line {
+      display: flex; align-items: center;
+      gap: 0; margin: 2rem 0;
+    }
+    .starting-line-bar {
+      flex: 1; height: 2px;
+      background: linear-gradient(to right, transparent, rgba(232,184,64,0.4));
+    }
+    .starting-line-center {
+      padding: 0.8rem 2rem;
+      background: rgba(232,184,64,0.1);
+      border: 1px solid rgba(232,184,64,0.4);
+      border-radius: 30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 0.15em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .starting-line-bar.right {
+      background: linear-gradient(to left, transparent, rgba(232,184,64,0.4));
+    }
+
+    /* ── IMPLEMENTATION ── */
+    .impl-intro {
+      background: rgba(74,158,200,0.07);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 1.8rem 2.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .commitment-card {
+      background: var(--white);
+      border: 2px solid var(--border-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px var(--warm-shadow);
+      margin: 2rem 0;
+    }
+    .commitment-card-header {
+      background: linear-gradient(135deg, rgba(74,158,200,0.12), rgba(232,244,253,0.8));
+      border-bottom: 2px solid var(--border-strong);
+      padding: 1.4rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .commitment-header-title {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--azure);
+    }
+    .commitment-header-note { font-size: 0.68rem; color: var(--text-light); font-style: italic; }
+    .commitment-body { padding: 2rem 2.5rem; }
+
+    .commitment-section {
+      margin-bottom: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .commitment-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .commitment-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text); margin-bottom: 0.8rem;
+    }
+
+    .commitment-weeks { display: flex; flex-direction: column; gap: 0.8rem; }
+    .commitment-week {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1rem;
+      background: var(--sky);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .week-label {
+      background: var(--azure);
+      padding: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--white); line-height: 1.3;
+    }
+    .week-content { padding: 1rem 1.2rem; }
+    .week-focus { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+    .week-actions { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; }
+
+    .commitment-lines { display: flex; flex-direction: column; gap: 1rem; }
+    .commitment-line-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .commitment-line-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 900;
+      color: var(--azure); flex-shrink: 0; width: 1.5rem;
+    }
+    .commitment-line-text { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; flex: 1; }
+    .commitment-line-text strong { color: var(--text); }
+    .commitment-write-line {
+      border-bottom: 1px solid var(--sky-deep);
+      height: 1.8rem; width: 100%; margin-top: 0.3rem;
+    }
+
+    .signal-commitment {
+      background: linear-gradient(135deg, rgba(74,158,200,0.08), rgba(232,244,253,0.8));
+      border: 1px solid var(--border-strong);
+      border-radius: 8px; padding: 1.6rem; margin-top: 1rem;
+    }
+    .signal-commitment-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--azure); margin-bottom: 0.5rem;
+    }
+    .signal-commitment-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem; color: var(--text); line-height: 1.6;
+    }
+
+    /* ── FINAL QUOTE ── */
+    .final-quote {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--azure-darkest), #0d2a40);
+      border-radius: 16px;
+      margin: 3rem 0;
+      position: relative; overflow: hidden;
+    }
+    .final-quote-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(232,184,64,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-quote blockquote {
+      position: relative; z-index: 2;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--white); line-height: 1.6;
+      max-width: 760px; margin: 0 auto 1.5rem;
+    }
+    .final-quote blockquote span { color: var(--gold); }
+    .final-quote cite {
+      position: relative; z-index: 2;
+      font-size: 0.8rem; color: rgba(232,184,64,0.5);
+      letter-spacing: 0.15em; text-transform: uppercase;
+    }
+
+    /* ── PAGE NAV ── */
+    .page-nav {
+      display: flex; justify-content: space-between;
+      padding: 2.5rem 0; border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+    .page-nav-btn {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--azure); text-decoration: none; transition: opacity 0.2s;
+    }
+    .page-nav-btn:hover { opacity: 0.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--azure-darkest);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--white); }
+    footer p { font-size: 0.75rem; color: rgba(232,184,64,0.5); margin: 0; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      25% { opacity: 0.85; transform: scale(0.97) translateY(-1px); }
+      50% { opacity: 0.95; transform: scale(1.02) translateY(-2px); }
+      75% { opacity: 0.9; transform: scale(0.98) translateY(-1px); }
+    }
+    .candle-flame { animation: flicker 3s ease-in-out infinite; display: inline-block; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Transplant Discharge Wellness Group</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="whos-invited.html">Who's Invited</a></li>
+      <li><a href="before-you-arrive.html">Before You Arrive</a></li>
+      <li><a href="facilitation.html">How This Room Works</a></li>
+      <li><a href="learning-environment.html">The Learning Environment</a></li>
+      <li><a href="point-of-care.html">The Point of Care</a></li>
+      <li><a href="the-bridge.html">The Bridge</a></li>
+      <li><a href="north-star.html">The North Star</a></li>
+      <li><a href="heat-map.html">The Heat Map</a></li>
+      <li><a href="measuring-impact.html">Measuring Impact</a></li>
+      <li><a href="closing.html" class="active">The Closing</a></li>
+    </ul>
+  </nav>
+
+  <!-- ANIMATED SUNRISE BANNER -->
+  <div class="page-banner">
+    <canvas id="sunriseCanvas"></canvas>
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <p class="banner-eyebrow fade-up">The Closing & Implementation</p>
+      <h1 class="banner-title fade-up delay-1">The <span>Starting</span> Line</h1>
+      <p class="banner-sub fade-up delay-2">What looks like an ending is the most important beginning this program will ever have. Parker was right. How you close is how they remember. This is how we close.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="section fade-up">
+      <div class="gold-rule"></div>
+      <div class="eyebrow">On Endings That Are Beginnings</div>
+      <h2 class="section-title">The room does not end. <em>It transforms.</em></h2>
+      <p>This program opened with a story about a man in a cab. It closes with the people who will make sure that story never repeats. Between those two moments, something happened in this room. Something that cannot be measured on a form. Something that belongs to every person who was present.</p>
+      <p>The Closing is in two parts. The first belongs to each person alone — a quiet moment to honor what they carried in and what they are choosing to carry out. The second belongs to all of them together — a collective act that bonds this team for every discharge they will ever stand at, side by side.</p>
+      <div class="parker-block">
+        <div class="parker-quote">"A good closing is a form of hospitality. It says: I value what happened here. I am not going to let it dissolve into the logistics of leaving. I am going to hold it long enough to let it mean something."</div>
+        <div class="parker-cite">— Priya Parker, The Art of Gathering</div>
+      </div>
+    </div>
+
+    <!-- LOOKING BACK -->
+    <div class="section fade-up">
+      <div class="gold-rule"></div>
+      <div class="eyebrow">Artifact One — The Looking Back Ceremony</div>
+      <h2 class="section-title">A ceremony in <em>two movements.</em></h2>
+      <div class="ceremony-intro">
+        <p class="ceremony-intro-text">This is not a Q&A. It is not a feedback form. It is not a thank-you speech. It is a designed moment — two movements — that honors what was built in this room and sends every person back into the world with their shoulders a little straighter than when they arrived. <em>The first movement is personal. The second is collective.</em> Both are required. Neither is optional.</p>
+      </div>
+
+      <!-- PART ONE -->
+      <div class="part-one">
+        <div class="part-header">
+          <div class="part-num">I</div>
+          <div>
+            <div class="part-label">First Movement — Personal</div>
+            <div class="part-title">The Looking Back <span class="candle-flame">🕯️</span></div>
+          </div>
+        </div>
+        <div class="part-body">
+          <p style="color:var(--text-mid); margin-bottom:1.5rem;">The room goes quiet. The facilitator speaks these words exactly — no improvisation, no addition. Then gives the room what it needs most: silence.</p>
+
+          <div class="direction-card">
+            <div class="direction-step">SET THE ROOM</div>
+            <div class="direction-text">Chairs remain in the circle. Lights dimmed if possible. No music. No movement. The facilitator stands — does not sit — and waits until the room is completely still before speaking.</div>
+          </div>
+          <div class="direction-card">
+            <div class="direction-step">SPEAK THESE WORDS</div>
+            <div class="direction-text"><em>"Before we leave this room, I want to ask you to do one thing. Close your eyes — or lower your gaze — and think about who you were when you walked through that door this morning.</em><br><br><em>Think about what you knew. What you assumed. What you were certain of, and what you were afraid to say out loud.</em><br><br><em>Now think about who is sitting in that chair right now.</em><br><br><em>Something happened in this room today. You helped make it happen. <strong>You showed up for a patient you have not yet met.</strong> Take a moment to honor that."</em></div>
+          </div>
+          <div class="direction-card">
+            <div class="direction-step">THE SILENCE</div>
+            <div class="direction-text"><strong>Hold the silence for a full 60 seconds.</strong> Do not rush it. Do not fill it. If someone cries, let them. If someone smiles, let them. This minute belongs entirely to the people in the room. It is the most important minute of the entire program.</div>
+          </div>
+
+          <div class="reflection-card">
+            <div class="reflection-title">Then — The Reflection Card</div>
+            <p style="text-align:center; font-size:0.85rem; color:var(--text-light); margin-bottom:1.5rem;">Each participant receives a small card. They write privately. The cards are theirs to keep — never collected.</p>
+            <div class="reflection-prompts">
+              <div class="reflection-prompt">
+                <div class="prompt-icon">🔍</div>
+                <div>
+                  <div class="prompt-text">"One thing I understood differently by the end of today than I did at the beginning."</div>
+                  <div class="prompt-subtext">Not what you learned. What shifted.</div>
+                </div>
+              </div>
+              <div class="reflection-prompt">
+                <div class="prompt-icon">🤲</div>
+                <div>
+                  <div class="prompt-text">"One patient — past or future — I am holding in my mind right now."</div>
+                  <div class="prompt-subtext">You do not have to write a name. You know who it is.</div>
+                </div>
+              </div>
+              <div class="reflection-prompt">
+                <div class="prompt-icon">⭐</div>
+                <div>
+                  <div class="prompt-text">"One thing I am choosing to do differently — starting with the next discharge I am part of."</div>
+                  <div class="prompt-subtext">Specific. Nameable. Yours.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="oath-card">
+            <div class="oath-eyebrow">Finally — The Personal Oath</div>
+            <div class="oath-text">
+              "I came to this room as a clinician.<br>
+              I leave as something more.<br>
+              I leave as someone who knows<br>
+              that the most important moment in a transplant patient's care<br>
+              is not the surgery.<br>
+              It is the <em>goodbye</em>.<br>
+              And I will never treat that goodbye the same way again."
+            </div>
+            <div class="oath-instruction">Read silently, or aloud if it feels right. Either is the right choice.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART TWO: THE WELDING -->
+      <div class="welding-section">
+        <div class="welding-sunbeam" id="weldingBeams"></div>
+        <div class="welding-header">
+          <div class="part-num" style="border-color:rgba(232,184,64,0.5); background:rgba(232,184,64,0.1); color:var(--gold);">II</div>
+          <div>
+            <div class="part-label" style="color:rgba(232,184,64,0.7);">Second Movement — Collective</div>
+            <div class="part-title" style="color:white;">The Welding 🔗</div>
+          </div>
+        </div>
+        <div class="welding-body">
+          <p style="margin-bottom:1.5rem;">The personal moment is over. Now the room comes back together. This is the moment that makes them a team — not a group of clinicians who attended the same training, but people who made the same promise in the same room on the same day.</p>
+
+          <div class="direction-card" style="background:rgba(232,184,64,0.06); border-color:rgba(232,184,64,0.2);">
+            <div class="direction-step" style="color:var(--gold);">THE CIRCLE</div>
+            <div class="direction-text" style="color:#c0d8e8;">Everyone stands. Chairs pushed back. The facilitator asks the group to form a standing circle — close enough that each person can place a hand on the shoulder of the person next to them. <strong style="color:white;">No one speaks yet.</strong> The facilitator waits until every hand is placed.</div>
+          </div>
+
+          <div class="chain-visual">
+            <div class="chain-link lit">You</div>
+            <div class="chain-connector"></div>
+            <div class="chain-link lit">Your<br>Colleague</div>
+            <div class="chain-connector"></div>
+            <div class="chain-link lit">Your<br>Team</div>
+            <div class="chain-connector"></div>
+            <div class="chain-link lit">Your<br>Patient</div>
+            <div class="chain-connector"></div>
+            <div class="chain-link lit">Their<br>Signal</div>
+            <div class="chain-connector"></div>
+            <div class="chain-link lit">Their<br>Future</div>
+          </div>
+
+          <div class="direction-card" style="background:rgba(232,184,64,0.06); border-color:rgba(232,184,64,0.2);">
+            <div class="direction-step" style="color:var(--gold);">THE NAMING</div>
+            <div class="direction-text" style="color:#c0d8e8;">The facilitator speaks: <em style="color:var(--gold);">"Look around this circle. These are the people who were in the room with you today. These are the people who will be at the discharge desk with you tomorrow. You did not choose to be a team today — you <strong style="color:white;">became</strong> one."</em></div>
+          </div>
+
+          <div class="team-oath">
+            <div class="team-oath-eyebrow">The Team Oath — Spoken Together</div>
+            <div class="team-oath-text">
+              "We were in the room.<br>
+              We heard the story.<br>
+              We made the same promise.<br>
+              <em>No patient leaves alone.</em><br>
+              <em>No gap goes unnamed.</em><br>
+              <em>No discharge is finished until it is truly done.</em><br>
+              We are the Transplant Discharge Wellness Team.<br>
+              This is where we begin."
+            </div>
+            <div class="team-oath-instruction">Spoken in unison. Slowly. Every word.</div>
+          </div>
+
+          <div class="direction-card" style="background:rgba(232,184,64,0.06); border-color:rgba(232,184,64,0.2);">
+            <div class="direction-step" style="color:var(--gold);">THE CLOSE</div>
+            <div class="direction-text" style="color:#c0d8e8;">The facilitator says nothing more. They step back into the circle. The session ends when the group decides it ends. <strong style="color:white;">This is the last act of generous authority.</strong> Giving the room its own ending.</div>
+          </div>
+
+          <div class="starting-line">
+            <div class="starting-line-bar"></div>
+            <div class="starting-line-center">✦ The Starting Line ✦</div>
+            <div class="starting-line-bar right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPLEMENTATION -->
+    <div class="section fade-up">
+      <div class="gold-rule"></div>
+      <div class="eyebrow">Artifact Two — The Implementation Bridge</div>
+      <h2 class="section-title">30 Days. <em>Real World. Real Practice.</em></h2>
+      <div class="impl-intro">
+        <p style="margin:0; color:var(--text-mid);">This is not a homework assignment. It is a personal roadmap — designed to be carried, not filed. Each clinician leaves with this document. It has their name on it in their own handwriting. It answers the question every adult learner asks when they walk out of a training room: <strong style="color:var(--text);">now what?</strong></p>
+      </div>
+
+      <div class="commitment-card">
+        <div class="commitment-card-header">
+          <span class="commitment-header-title">My 30-Day Implementation Commitment</span>
+          <span class="commitment-header-note">Transplant Discharge Wellness Group · Founding Member</span>
+        </div>
+        <div class="commitment-body">
+          <div class="commitment-section">
+            <div class="commitment-section-title">Week by Week — What I Am Committing To</div>
+            <div class="commitment-weeks">
+              <div class="commitment-week">
+                <div class="week-label">Week<br>One</div>
+                <div class="week-content">
+                  <div class="week-focus">Named Signal Before Day 7</div>
+                  <div class="week-actions">I will identify and document The Signal for every transplant patient I discharge. I will not leave that field blank. If there is no natural Signal, I will escalate — loudly — and document what I did.</div>
+                </div>
+              </div>
+              <div class="commitment-week">
+                <div class="week-label">Week<br>Two</div>
+                <div class="week-content">
+                  <div class="week-focus">One Show-Me Demonstration Per Discharge</div>
+                  <div class="week-actions">I will require at least one show-me demonstration before I sign off on any discharge. If the patient cannot demonstrate it, the 72-hour plan is not complete.</div>
+                </div>
+              </div>
+              <div class="commitment-week">
+                <div class="week-label">Week<br>Three</div>
+                <div class="week-content">
+                  <div class="week-focus">The Family Conversation</div>
+                  <div class="week-actions">I will have the real family conversation — not the logistics one — for at least one patient. I will ask who is actually coming, what the relationship looks like, and whether that person is prepared for what they are walking into.</div>
+                </div>
+              </div>
+              <div class="commitment-week">
+                <div class="week-label">Week<br>Four</div>
+                <div class="week-content">
+                  <div class="week-focus">Peer Debrief & Evidence Portfolio</div>
+                  <div class="week-actions">I will attend the peer debrief and bring one real story. I will complete my Evidence Portfolio honestly. My work sample will be specific, not general.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="commitment-section">
+            <div class="commitment-section-title">My Three Personal Commitments — In My Own Words</div>
+            <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:1.2rem;">Write these before you leave the room today. These are not goals. They are commitments.</p>
+            <div class="commitment-lines">
+              <div class="commitment-line-item">
+                <div class="commitment-line-num">1</div>
+                <div class="commitment-line-text">
+                  <strong>Starting with my very next discharge, I will:</strong>
+                  <div class="commitment-write-line"></div>
+                </div>
+              </div>
+              <div class="commitment-line-item">
+                <div class="commitment-line-num">2</div>
+                <div class="commitment-line-text">
+                  <strong>The one thing I am most likely to let slip — and what I will do to prevent that:</strong>
+                  <div class="commitment-write-line"></div>
+                </div>
+              </div>
+              <div class="commitment-line-item">
+                <div class="commitment-line-num">3</div>
+                <div class="commitment-line-text">
+                  <strong>The colleague who will hold me accountable — and what I am asking them to watch for:</strong>
+                  <div class="commitment-write-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="commitment-section">
+            <div class="commitment-section-title">My Signal Commitment</div>
+            <div class="signal-commitment">
+              <div class="signal-commitment-label">I commit to this standard — without exception</div>
+              <div class="signal-commitment-text">"Before I sign any discharge, I will be able to answer this question: <em>If this patient calls for help at 2am on Day 3, who answers the phone — and do they know what to do?</em> If I cannot answer that question, the discharge is not finished. It does not matter what the clock says."</div>
+            </div>
+          </div>
+
+          <div class="commitment-section">
+            <div class="commitment-section-title">What My Team Can Count On From Me</div>
+            <div class="commitment-lines">
+              <div class="commitment-line-item">
+                <div class="commitment-line-num">✦</div>
+                <div class="commitment-line-text">
+                  <strong>When I see a gap that is not mine to fix, I will name it — not ignore it:</strong>
+                  <div class="commitment-write-line"></div>
+                </div>
+              </div>
+              <div class="commitment-line-item">
+                <div class="commitment-line-num">✦</div>
+                <div class="commitment-line-text">
+                  <strong>When I am running low, I will say so — because my team deserves to know:</strong>
+                  <div class="commitment-write-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL QUOTE -->
+    <div class="final-quote fade-up">
+      <div class="final-quote-glow"></div>
+      <blockquote>"He survived the surgery.<br>He survived hospice. Twice.<br>He survived the waiting list.<br>He survived everything medicine asked of him.<br><span>He deserved to survive the discharge desk too.</span><br>Now — so will yours."</blockquote>
+      <cite>— Transplant Discharge Wellness Group · The Starting Line</cite>
+    </div>
+
+    <div class="page-nav">
+      <a href="measuring-impact.html" class="page-nav-btn">← Measuring Impact</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-brand">Transplant Discharge Wellness Group</span>
+    <p>Confidential — Internal Hospital Training Program · The Starting Line</p>
+  </footer>
+
+  <script>
+    // ── FADE UP ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── ANIMATED SUNRISE CANVAS ──
+    const canvas = document.getElementById('sunriseCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, t = 0;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function drawSunrise(time) {
+      ctx.clearRect(0, 0, W, H);
+      t = time * 0.0004;
+
+      // ── SKY GRADIENT ──
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      sky.addColorStop(0,   '#1a4a7a');   // deep azure top
+      sky.addColorStop(0.3, '#2a7aaa');   // mid azure
+      sky.addColorStop(0.6, '#5ab0d8');   // light azure
+      sky.addColorStop(0.8, '#a8d8f0');   // pale sky
+      sky.addColorStop(1,   '#e8f4fd');   // horizon sky
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, W, H);
+
+      // ── SUN POSITION ──
+      const sunX = W / 2;
+      const sunY = H * 0.72;
+      const sunR = 38;
+
+      // ── ANIMATED SUNBEAMS ──
+      const numRays = 16;
+      for (let i = 0; i < numRays; i++) {
+        const baseAngle = (i / numRays) * Math.PI * 2;
+        const angle = baseAngle + t * 0.3; // slow rotation
+        const pulseOffset = Math.sin(t * 2 + i * 0.8) * 0.15;
+        const rayLen = H * (0.65 + pulseOffset + (i % 3 === 0 ? 0.1 : 0));
+        const rayWidth = i % 4 === 0 ? 3 : 1.5;
+        const alpha = 0.06 + Math.sin(t * 1.5 + i) * 0.03;
+
+        const x2 = sunX + Math.cos(angle) * rayLen;
+        const y2 = sunY + Math.sin(angle) * rayLen;
+
+        const grad = ctx.createLinearGradient(sunX, sunY, x2, y2);
+        grad.addColorStop(0, `rgba(255, 240, 150, ${alpha * 3})`);
+        grad.addColorStop(0.3, `rgba(255, 220, 80, ${alpha})`);
+        grad.addColorStop(1, `rgba(255, 200, 50, 0)`);
+
+        ctx.beginPath();
+        ctx.moveTo(sunX, sunY);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = rayWidth;
+        ctx.stroke();
+      }
+
+      // ── WIDE SOFT GLOW RAYS (slower, wider) ──
+      for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2 + t * 0.08;
+        const alpha = 0.04 + Math.sin(t + i * 1.2) * 0.02;
+        const len = H * 1.1;
+        const spread = 0.12;
+
+        ctx.beginPath();
+        ctx.moveTo(sunX, sunY);
+        const x1 = sunX + Math.cos(angle - spread) * len;
+        const y1 = sunY + Math.sin(angle - spread) * len;
+        const x2 = sunX + Math.cos(angle + spread) * len;
+        const y2 = sunY + Math.sin(angle + spread) * len;
+        ctx.lineTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(255, 230, 100, ${alpha})`;
+        ctx.fill();
+      }
+
+      // ── SUN HALO ──
+      const halo = ctx.createRadialGradient(sunX, sunY, sunR, sunX, sunY, sunR * 8);
+      halo.addColorStop(0,   'rgba(255, 248, 200, 0.5)');
+      halo.addColorStop(0.2, 'rgba(255, 220, 80,  0.25)');
+      halo.addColorStop(0.5, 'rgba(200, 160, 40,  0.1)');
+      halo.addColorStop(1,   'rgba(200, 146, 42,  0)');
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, sunR * 8, 0, Math.PI * 2);
+      ctx.fillStyle = halo;
+      ctx.fill();
+
+      // ── SUN BODY ──
+      const sunGrad = ctx.createRadialGradient(sunX - 5, sunY - 5, 2, sunX, sunY, sunR);
+      sunGrad.addColorStop(0,   '#fffbe0');
+      sunGrad.addColorStop(0.4, '#f5e040');
+      sunGrad.addColorStop(1,   '#e8b440');
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, sunR, 0, Math.PI * 2);
+      ctx.fillStyle = sunGrad;
+      ctx.fill();
+
+      // ── CLOUDS ──
+      drawCloud(ctx, W * 0.15, H * 0.22, 90, 28, t * 0.012);
+      drawCloud(ctx, W * 0.78, H * 0.18, 70, 22, t * 0.009);
+      drawCloud(ctx, W * 0.55, H * 0.12, 55, 18, t * 0.015);
+      drawCloud(ctx, W * 0.35, H * 0.30, 45, 14, t * 0.011);
+
+      // ── HORIZON GLOW ──
+      const horiz = ctx.createLinearGradient(0, sunY - 20, 0, H);
+      horiz.addColorStop(0,   'rgba(255, 240, 150, 0.18)');
+      horiz.addColorStop(0.3, 'rgba(255, 200, 60,  0.08)');
+      horiz.addColorStop(1,   'rgba(232, 244, 253, 0)');
+      ctx.fillStyle = horiz;
+      ctx.fillRect(0, sunY - 20, W, H - sunY + 20);
+
+      // ── HORIZON LINE ──
+      ctx.beginPath();
+      ctx.moveTo(0, H * 0.82);
+      ctx.lineTo(W, H * 0.82);
+      ctx.strokeStyle = 'rgba(74, 158, 200, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // ── SILHOUETTES ──
+      drawSilhouettes(ctx, W, H);
+
+      requestAnimationFrame(drawSunrise);
+    }
+
+    function drawCloud(ctx, x, y, w, h, drift) {
+      const dx = Math.sin(drift) * 8;
+      ctx.save();
+      ctx.globalAlpha = 0.55;
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.beginPath();
+      ctx.ellipse(x + dx, y, w, h * 0.6, 0, 0, Math.PI * 2);
+      ctx.ellipse(x + dx + w * 0.3, y - h * 0.2, w * 0.7, h * 0.5, 0, 0, Math.PI * 2);
+      ctx.ellipse(x + dx - w * 0.25, y - h * 0.15, w * 0.6, h * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawSilhouettes(ctx, W, H) {
+      const groundY = H * 0.83;
+      const figures = [
+        { x: W * 0.34, h: 95 },
+        { x: W * 0.40, h: 105 },
+        { x: W * 0.47, h: 115 }, // center, tallest
+        { x: W * 0.54, h: 105 },
+        { x: W * 0.60, h: 95 },
+      ];
+
+      ctx.fillStyle = 'rgba(10, 22, 40, 0.82)';
+
+      figures.forEach((fig, i) => {
+        const baseY = groundY;
+        const bodyH = fig.h;
+        const headR = bodyH * 0.14;
+        const bodyW = bodyH * 0.28;
+        const cx = fig.x;
+
+        // Head
+        ctx.beginPath();
+        ctx.arc(cx, baseY - bodyH - headR * 0.6, headR, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Body
+        ctx.beginPath();
+        ctx.roundRect(cx - bodyW / 2, baseY - bodyH, bodyW, bodyH, 6);
+        ctx.fill();
+
+        // Arms to neighbors
+        const armY = baseY - bodyH * 0.65;
+        if (i < figures.length - 1) {
+          ctx.beginPath();
+          ctx.moveTo(cx + bodyW / 2, armY);
+          ctx.lineTo(figures[i + 1].x - figures[i + 1].h * 0.14, armY + 3);
+          ctx.lineWidth = bodyW * 0.35;
+          ctx.strokeStyle = 'rgba(10, 22, 40, 0.82)';
+          ctx.lineCap = 'round';
+          ctx.stroke();
+        }
+
+        // Center figure slightly raised arms
+        if (i === 2) {
+          ctx.beginPath();
+          ctx.moveTo(cx - bodyW / 2, armY);
+          ctx.lineTo(cx - bodyW * 1.6, armY - bodyH * 0.18);
+          ctx.lineWidth = bodyW * 0.3;
+          ctx.strokeStyle = 'rgba(10, 22, 40, 0.82)';
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(cx + bodyW / 2, armY);
+          ctx.lineTo(cx + bodyW * 1.6, armY - bodyH * 0.18);
+          ctx.stroke();
+        }
+      });
+
+      // Ground shadow
+      const shadow = ctx.createLinearGradient(0, groundY, 0, groundY + 30);
+      shadow.addColorStop(0, 'rgba(10,22,40,0.15)');
+      shadow.addColorStop(1, 'rgba(10,22,40,0)');
+      ctx.fillStyle = shadow;
+      ctx.fillRect(W * 0.28, groundY, W * 0.44, 30);
+    }
+
+    requestAnimationFrame(drawSunrise);
+
+    // ── WELDING SECTION BEAMS ──
+    const weldingContainer = document.getElementById('weldingBeams');
+    if (weldingContainer) {
+      for (let i = 0; i < 8; i++) {
+        const ray = document.createElement('div');
+        ray.className = 'welding-ray';
+        ray.style.cssText = `
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: ${i % 2 === 0 ? 2 : 1}px;
+          height: ${60 + Math.random() * 40}%;
+          background: linear-gradient(to top, rgba(232,184,64,0.3), transparent);
+          transform-origin: bottom center;
+          transform: rotate(${-70 + i * 20}deg);
+          animation: weldBeam ${3 + i * 0.4}s ease-in-out infinite alternate;
+          opacity: ${0.2 + i * 0.05};
+        `;
+        weldingContainer.appendChild(ray);
+      }
+
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes weldBeam {
+          0% { opacity: 0.1; transform: rotate(var(--r, -70deg)) scaleY(0.8); }
+          100% { opacity: 0.4; transform: rotate(var(--r, -70deg)) scaleY(1.1); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  </script>
+</body>
+</html>
